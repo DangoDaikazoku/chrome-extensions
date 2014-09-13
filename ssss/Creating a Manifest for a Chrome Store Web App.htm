@@ -1,0 +1,764 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0122)http://www.htmlgoodies.com/beyond/webmaster/toolbox/article.php/3900531/Creating-a-Manifest-for-a-Chrome-Store-Web-App.htm -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+	<meta name="WT.qs_dlk" content="XnYNBArIZzwAABTTmdoAAAAi">
+
+	<meta name="WT.qs_shmv" content="lv20100812-walser.sf.quinstreet.net">
+	<meta http-equiv="Set-Cookie" content="WMUUID=XnYNBArIZzwAABTTmdoAAAAi; path=/;   domain=htmlgoodies.com;">
+
+	<meta name="inject_params" content="WT.qs_dlk=XnYNBArIZzwAABTTmdoAAAAi&amp;">
+
+	<meta http-equiv="Set-Cookie" content="inject_params=WT.qs_dlk=XnYNBArIZzwAABTTmdoAAAAi&amp;; path=/;   domain=htmlgoodies.com;">
+
+        <title>Creating a Manifest for a Chrome Store Web App</title>
+        <meta name="description" content="In our last article, we explained the details of creating an app for Google&#39;s Chrome Web Store. This time we&#39;ll actually create a manifest file, and add the app to Google Chrome, explaining the process along the way.">
+        <meta name="keywords" content="html, help, free images, goodies, color codes, tutorial, html basics, basic html, tutorials, color codes, hex codes, image map, javascript onclick, backgrounds, onmouseover, learn html javascript, css, java, window, htmlgoodies.com, php, vbscript, asp">
+        <meta name="channel" content="IT">
+        
+		
+		<link rel="icon" type="image/x-icon" href="http://www.htmlgoodies.com/favicon.ico">
+
+<meta name="application-name" content="HTMLGoodies">
+<meta name="msapplication-tooltip" content="HTMLGoodies: The Ultimate HTML Resource">
+<meta name="msapplication-starturl" content="http://www.htmlgoodies.com/">
+
+		
+        
+        
+		<link rel="stylesheet" type="text/css" href="./Creating a Manifest for a Chrome Store Web App_files/reset-context-min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="./Creating a Manifest for a Chrome Store Web App_files/style.css">
+		
+		<script type="text/javascript" async="" src="./Creating a Manifest for a Chrome Store Web App_files/ga.js"></script><script type="text/javascript" src="./Creating a Manifest for a Chrome Store Web App_files/jquery.min.js"></script>
+        <script type="text/javascript" src="./Creating a Manifest for a Chrome Store Web App_files/common.js"></script>
+		
+				<script type="text/javascript" src="./Creating a Manifest for a Chrome Store Web App_files/plusone.js"></script><script src="./Creating a Manifest for a Chrome Store Web App_files/googleapis.client__plusone.js"></script>
+		        <!-- CLASS-METHOD=content/article_legacy --><script language="javascript" src="./Creating a Manifest for a Chrome Store Web App_files/cmp0.js"></script>
+<script language="javascript" src="./Creating a Manifest for a Chrome Store Web App_files/fx.js"></script>
+<script language="JavaScript" src="./Creating a Manifest for a Chrome Store Web App_files/fc.js"></script><script language="JavaScript" src="./Creating a Manifest for a Chrome Store Web App_files/g.js"></script>
+        <!-- CLASS-METHOD=content/article_legacy --><!-- J not found in config -->    </head>
+
+    <body><div id="itxtexclude"><script src="./Creating a Manifest for a Chrome Store Web App_files/freeform_1308735381.js" type="text/javascript"></script><script src="./Creating a Manifest for a Chrome Store Web App_files/init" type="text/javascript"></script><link id="itxtcss" href="./Creating a Manifest for a Chrome Store Web App_files/itxtcss_1307009512.css" type="text/css" rel="stylesheet"><script src="./Creating a Manifest for a Chrome Store Web App_files/ui_1312993472.js" type="text/javascript"></script><script src="./Creating a Manifest for a Chrome Store Web App_files/tmpl_1312377644.js" type="text/javascript"></script><script src="./Creating a Manifest for a Chrome Store Web App_files/metrics_1308735381.js" type="text/javascript"></script><script src="./Creating a Manifest for a Chrome Store Web App_files/itxt_1313059464.js" type="text/javascript"></script><script src="./Creating a Manifest for a Chrome Store Web App_files/fx_1308735381.js" type="text/javascript"></script><script src="./Creating a Manifest for a Chrome Store Web App_files/debug_1308735381.js" type="text/javascript"></script><script src="./Creating a Manifest for a Chrome Store Web App_files/data_1312557847.js" type="text/javascript"></script><script src="./Creating a Manifest for a Chrome Store Web App_files/core_1308735381.js" type="text/javascript"></script></div>
+		        <div id="container">
+            <div id="header" class="yui3-cssreset">
+                <div id="logo">
+                    <a href="http://www.htmlgoodies.com/"><img src="./Creating a Manifest for a Chrome Store Web App_files/logo.png" alt="htmlgoodies.com"></a>
+                </div>
+
+                <div class="sda">
+                    <!-- CLASS-METHOD=content/article_legacy --><!--
+AD position = A
+OAS eqv. = 468x60-1
+QUAD pos = Leo-FLEX(LEO)POS(TOP)
+QUAD path = www.htmlgoodies.com/beyond/webmaster www.htmlgoodies.com/beyond/reference www.htmlgoodies.com/beyond/master www.htmlgoodies.com/primers/ad_banners www.htmlgoodies.com/introduction/newsletter_archive/goodiestogo www.htmlgoodies.com/introduction/newsletter_archive/design www.htmlgoodies.com/beyond/webmaster/toolbox www.htmlgoodies.com/beyond/webmaster/projects
+Page type = other
+-->
+<script language="JavaScript">
+zzfocrender("203", "9517", "656897/656893/656882/656671/581034", "14", "728", "90", "", "", "");</script><script language="JavaScript" src="./Creating a Manifest for a Chrome Store Web App_files/i0.js"></script><script language="JavaScript" src="./Creating a Manifest for a Chrome Store Web App_files/i.js"></script><iframe src="./Creating a Manifest for a Chrome Store Web App_files/B5662507(1).htm" width="728" height="90" frameborder="0" border="0" marginwidth="0" marginheight="0" scrolling="no" align="top"></iframe>
+<noscript>
+&lt;a href="http://o1.qnsr.com/cgi/r?WT.qs_dlk=XnYNBArIZzwAABTTmdoAAAAi;;;n=203;c=656897/656893/656882/656671/581034;s=9517;x=3584;f=2171626728;u=j;z=20110813020811" target="_blank"&gt;
+&lt;img border="0" width="728" height="90" src="http://o1.qnsr.com/cgi/x?;n=203;c=656897/656893/656882/656671/581034;s=9517;x=3584;f=2171626728;u=j;z=20110813020811" alt="Click here"&gt;&lt;/a&gt;
+</noscript>
+                </div>
+
+                <div id="header-bar">
+                    <div id="new-to-htmlgoodies">
+                        <a href="http://www.htmlgoodies.com/introduction/about/"><img src="./Creating a Manifest for a Chrome Store Web App_files/new_to_htmlgoodies.png" alt="New to HTMLGoodies?"></a>
+                    </div>
+
+                    <div id="search-form">
+                        <form method="get" action="http://search.internet.com/query.php">
+                            <fieldset class="search">
+                                <legend>Search</legend>
+                                <input type="hidden" name="site" value="htmlgoodies">
+                                <input type="text" id="search-input" name="IC_QueryText">
+                                <button id="search-submit" type="submit" title="Search">Search</button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="body">
+                 <div id="navigation" class="yui3-cssreset">
+					<ul>
+	<li class="first parent"><a href="http://www.htmlgoodies.com/introduction">Introduction</a></li><li>
+	<a href="http://www.htmlgoodies.com/">home</a></li><li>
+	<a href="http://www.htmlgoodies.com/introduction/about/">about</a></li><li>
+	<a href="http://www.htmlgoodies.com/introduction/intro/">non-technical introduction</a></li><li>
+	<a href="http://www.htmlgoodies.com/introduction/newsletter_archive/">newsletter archive</a></li>
+	<li class="parent"> 
+	<a href="http://www.htmlgoodies.com/html5">HTML 5</a></li>
+	<a href="http://www.htmlgoodies.com/html5">html5 development center</a>
+	<li class="parent">
+	<a href="http://www.htmlgoodies.com/primers/">Primers</a></li><li>
+	<a href="http://www.htmlgoodies.com/primers/html/">html</a></li><li>
+	<a href="http://www.htmlgoodies.com/primers/myspacehtml/">social media and html</a></li><li>
+	<a href="http://www.htmlgoodies.com/primers/ad_banners/">ad banners</a></li><li>
+	<a href="http://www.htmlgoodies.com/primers/perl/">perl &amp; cgi</a></li><li>
+	<a href="http://www.htmlgoodies.com/primers/asp/">asp</a></li><li>
+	<a href="http://www.htmlgoodies.com/primers/jsp/">javascript</a></li><li>
+	<a href="http://www.htmlgoodies.com/primers/database/">database - sql</a></li><li class="parent">
+	<a href="http://www.htmlgoodies.com/tutorials/">HTML &amp; Graphics Tutorials</a></li><li>
+	<a href="http://www.htmlgoodies.com/tutorials/getting_started/">getting started</a></li><li>
+	<a href="http://www.htmlgoodies.com/tutorials/backgrounds/">backgrounds</a></li><li>
+	<a href="http://www.htmlgoodies.com/tutorials/buttons/">buttons</a></li><li>
+	<a href="http://www.htmlgoodies.com/tutorials/browser_specific/">browser specific</a></li><li>
+	<a href="http://www.htmlgoodies.com/tutorials/colors/">colors</a></li><li>
+	<a href="http://www.htmlgoodies.com/tutorials/forms/">forms</a></li><li>
+	<a href="http://www.htmlgoodies.com/tutorials/frames/">frames</a></li><li>
+	<a href="http://www.htmlgoodies.com/tutorials/html_401/">html 4.01 tags</a></li><li>
+	<a href="http://www.htmlgoodies.com/tutorials/html_401/html4-ref/">html 4.01 ref</a></li><li>
+	<a href="http://www.htmlgoodies.com/tutorials/image_maps/">image maps</a></li><li>
+	<a href="http://www.htmlgoodies.com/tutorials/tables/">tables</a></li><li>
+	<a href="http://www.htmlgoodies.com/tutorials/web_graphics/">web graphics</a></li><li class="parent">
+	<a href="http://www.htmlgoodies.com/beyond/">Beyond HTML</a></li><li>
+	<a href="http://www.htmlgoodies.com/beyond/asp/">asp</a></li><li>
+	<a href="http://www.htmlgoodies.com/beyond/css/">cascading style sheets</a></li><li>
+	<a href="http://www.htmlgoodies.com/beyond/css/css-ref">css keyword ref</a></li><li>
+	<a href="http://www.htmlgoodies.com/beyond/cgi/">cgi scripting</a></li><li>
+	<a href="http://www.htmlgoodies.com/beyond/dhtml/">dhtml/layers</a></li><li>
+	<a href="http://www.htmlgoodies.com/beyond/dotnet/">dot net</a></li><li>
+	<a href="http://www.htmlgoodies.com/beyond/java/">java applets</a></li><li>
+	<a href="http://www.htmlgoodies.com/beyond/javascript/">javascript</a></li><li>
+	<a href="http://www.htmlgoodies.com/beyond/javascript/frameworks">javascript frameworks</a></li><li>	
+	<a href="http://www.htmlgoodies.com/beyond/javascript/js-ref">javascript keyword ref</a></li><li>
+	<a href="http://www.htmlgoodies.com/beyond/javascript/stips">javascript script tips</a></li><li>
+	<a href="http://www.htmlgoodies.com/beyond/mobile/">mobile web development</a></li><li>
+	<a href="http://www.htmlgoodies.com/beyond/cms/">open source cms</a></li><li>
+	<a href="http://www.htmlgoodies.com/beyond/php/">php</a></li><li>
+	<a href="http://www.htmlgoodies.com/beyond/security/">security</a></li><li>
+	<a href="http://www.htmlgoodies.com/beyond/seo/">SEO</a></li><li>
+	<a href="http://www.htmlgoodies.com/beyond/asp/vbs-ref">vb script keyword ref</a></li><li>
+	<a href="http://www.htmlgoodies.com/beyond/webmaster/">webmaster tips</a></li><li>
+	<a href="http://www.htmlgoodies.com/beyond/webmaster/projects">webmaster projects</a></li><li>
+	<a href="http://www.htmlgoodies.com/beyond/webmaster/toolbox">webmaster toolbox</a></li><li>
+	<a href="http://www.htmlgoodies.com/beyond/video/">video</a></li><li>
+	<a href="http://www.htmlgoodies.com/beyond/xml/">xml</a></li><li>
+	<a href="http://www.htmlgoodies.com/beyond/reference/">general reference pieces</a></li><li>
+	<a href="http://www.htmlgoodies.com/beyond/master/">the master list</a></li><li class="parent">						
+	<a onclick="return false;" href="http://www.htmlgoodies.com/beyond/webmaster/toolbox/article.php/3900531/Creating-a-Manifest-for-a-Chrome-Store-Web-App.htm#">Need Help?</a></li><li>
+	<a href="http://www.webdeveloper.com/forum">discussion boards</a></li><li>
+	<a href="http://www.htmlgoodies.com/mentors/">mentors</a></li><li>
+	<a href="http://www.justtechjobs.com/Jobseekers.asp">technology jobs</a></li><li class="parent">
+	<a onclick="return false;" href="http://www.htmlgoodies.com/beyond/webmaster/toolbox/article.php/3900531/Creating-a-Manifest-for-a-Chrome-Store-Web-App.htm#">Web Development</a></li><li>
+	<a href="http://webdeveloper.earthweb.com/">earthwebdeveloper.com</a></li><li>
+	<a href="http://www.javascripts.com/">javascripts.com</a></li>
+</ul>                </div>
+                <div id="main-col">
+                    <div id="content">
+						<span class="yui3-cssreset">
+                                                                        						
+                        						</span>
+                        <div class="ciu ciu_ads">
+	<span class="ciu_wrapper"><!-- CLASS-METHOD=content/article_legacy --><!--
+AD position = U
+OAS eqv. = ciu
+QUAD pos = ciu-FLEX(CIU)
+QUAD path = www.htmlgoodies.com/beyond/webmaster www.htmlgoodies.com/beyond/reference www.htmlgoodies.com/beyond/master www.htmlgoodies.com/primers/ad_banners www.htmlgoodies.com/introduction/newsletter_archive/goodiestogo www.htmlgoodies.com/introduction/newsletter_archive/design www.htmlgoodies.com/beyond/webmaster/toolbox www.htmlgoodies.com/beyond/webmaster/projects
+Page type = other
+-->
+<script language="JavaScript">
+zzfocrender("203", "9517", "656900/656893/656882/656671/581034", "59", "600", "200", "", "", "");</script><script language="JavaScript" src="./Creating a Manifest for a Chrome Store Web App_files/i0(1).js"></script><script language="JavaScript" src="./Creating a Manifest for a Chrome Store Web App_files/i(1).js"></script><div style="background-color:#E1E1E1"><a href="http://o1.qnsr.com//cgi/c?a=20166002;x=15105;c=203656900,203656900;i=0;n=203;s=9517;q=1;WT.qs_dlk=XnYNBArIZzwAABTTmdoAAAAi&;;y=http://www.htmlgoodies.com/beyond/webmaster/toolbox/article.php/3900531/Creating-a-Manifest-for-a-Chrome-Store-Web-App.htm;;e=i;s=9517;g=78;w=9;m=0;WT.qs_dlk=XnYNBArIZzwAABTTmdoAAAAi&;z=468897532;k=http://ad.doubleclick.net/clk;243569790;67280264;t;pc=[TPAS_ID]">  <b>Unwire your business, enjoy secure access anytime, anywhere and on any mobile with SAP</b>  </a></div><img src="./Creating a Manifest for a Chrome Store Web App_files/B5654383.2;sz=1x1;pc=[TPAS_ID]" width="1" height="1" alt="Advertisement">
+<noscript>
+&lt;a href="http://o1.qnsr.com/cgi/r?WT.qs_dlk=XnYNBArIZzwAABTTmdoAAAAi;;;n=203;c=656900/656893/656882/656671/581034;s=9517;x=15104;f=9073721314;u=j;z=20110813020811" target="_blank"&gt;
+&lt;img border="0" width="600" height="200" src="http://o1.qnsr.com/cgi/x?;n=203;c=656900/656893/656882/656671/581034;s=9517;x=15104;f=9073721314;u=j;z=20110813020811" alt="Click here"&gt;&lt;/a&gt;
+</noscript>
+</span>
+	<span class="ciu_wrapper"><!-- CLASS-METHOD=content/article_legacy --><!--
+AD position = U2
+OAS eqv. = ciu2
+QUAD pos = CIU-FLEX(CIU-2)
+QUAD path = www.htmlgoodies.com/beyond/webmaster www.htmlgoodies.com/beyond/reference www.htmlgoodies.com/beyond/master www.htmlgoodies.com/primers/ad_banners www.htmlgoodies.com/introduction/newsletter_archive/goodiestogo www.htmlgoodies.com/introduction/newsletter_archive/design www.htmlgoodies.com/beyond/webmaster/toolbox www.htmlgoodies.com/beyond/webmaster/projects
+Page type = other
+-->
+<script language="JavaScript">
+zzfocrender("203", "9517", "836415/656893/656882/656671/581034", "59", "600", "200", "", "", "");</script><script language="JavaScript" src="./Creating a Manifest for a Chrome Store Web App_files/i0(2).js"></script><script language="JavaScript" src="./Creating a Manifest for a Chrome Store Web App_files/i(2).js"></script><div style="background-color:#E1E1E1"><a href="http://o1.qnsr.com//cgi/c?a=20165320;x=15105;c=203836415,203836415;i=0;n=203;s=9517;q=1;WT.qs_dlk=XnYNBArIZzwAABTTmdoAAAAi&;;y=http://www.htmlgoodies.com/beyond/webmaster/toolbox/article.php/3900531/Creating-a-Manifest-for-a-Chrome-Store-Web-App.htm;;e=i;s=9517;g=78;w=9;m=0;WT.qs_dlk=XnYNBArIZzwAABTTmdoAAAAi&;z=435620794;k=http://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=tf&c=20&mc=click&pli=2908176&PluID=0&ord=123456">  <b>Increase your sales up to 24%.</b> Why do some sites sell more than others? Because they display the VeriSign seal. Experience a 24% average increase in website sales. Start your free trial today&gt;&gt;verisign.com/ssl/free-trial</a></div><img src="./Creating a Manifest for a Chrome Store Web App_files/adServer.bs">
+<noscript>
+&lt;a href="http://o1.qnsr.com/cgi/r?WT.qs_dlk=XnYNBArIZzwAABTTmdoAAAAi;;;n=203;c=836415/656893/656882/656671/581034;s=9517;x=15104;f=1178908702;u=j;z=20110813020811" target="_blank"&gt;
+&lt;img border="0" width="600" height="200" src="http://o1.qnsr.com/cgi/x?;n=203;c=836415/656893/656882/656671/581034;s=9517;x=15104;f=1178908702;u=j;z=20110813020811" alt="Click here"&gt;&lt;/a&gt;
+</noscript>
+</span>
+</div>
+
+<div id="article">
+    <div class="toolbox noBullets colRight">
+	<ul>
+		<li class="comment"><a rel="nofollow" class="comment-reply" href="http://www.htmlgoodies.com/beyond/webmaster/toolbox/article.php/3900531/Creating-a-Manifest-for-a-Chrome-Store-Web-App.htm#comment_form">Post a comment</a></li>
+		<li class="email"><a rel="nofollow" href="http://www.htmlgoodies.com/email.php/beyond/webmaster/toolbox/article.php/3900531/Creating-a-Manifest-for-a-Chrome-Store-Web-App.htm">Email Article</a></li>
+		<li class="print"><a rel="nofollow" href="http://www.htmlgoodies.com/print/beyond/webmaster/toolbox/print.php/3900531/Creating-a-Manifest-for-a-Chrome-Store-Web-App.htm">Print Article</a></li>
+
+		<li id="toolBoxShareMenu" class="share">
+			<img height="16" width="16" class="icon" alt="" src="./Creating a Manifest for a Chrome Store Web App_files/icon_share.gif"> <a rel="nofollow" href="http://www.htmlgoodies.com/beyond/webmaster/toolbox/article.php/3900531/Creating-a-Manifest-for-a-Chrome-Store-Web-App.htm#">Share Articles</a><img src="./Creating a Manifest for a Chrome Store Web App_files/arrow_down_red.gif" alt="Share articles" width="9px" height="9px">
+			<div class="shareSubMenu">
+				<span class="top"><span></span></span>
+					<ul>
+						<li><a href="javascript:void(0)" onclick="javascript:window.open(&#39;http://reddit.com/submit?url=&#39;+encodeURIComponent(location.href)+&#39;&amp;title=&#39;+encodeURIComponent(document.title));"><img src="./Creating a Manifest for a Chrome Store Web App_files/icon_reddit.gif" alt="" width="16" height="16" border="0" class="icon"> Reddit</a></li>
+						<li><a href="javascript:void(0)" onclick="javascript:window.open(&#39;http://www.facebook.com/sharer.php?u=&#39;+encodeURIComponent(location.href));"><img src="./Creating a Manifest for a Chrome Store Web App_files/icon_facebook.gif" alt="" width="16" height="16" border="0" class="icon"> Facebook</a></li>
+                            <li><a href="javascript:void(0)" onclick="javascript:window.open(&#39;http://twitter.com/home?status=&#39;+encodeURIComponent(location.href));"><img src="./Creating a Manifest for a Chrome Store Web App_files/icon_twitter.gif" alt="" width="16" height="16" class="icon"> Twitter</a></li>
+						<li><a href="javascript:void(0)" onclick="javascript:window.open(&#39;http://del.icio.us/post?v=4&amp;noui&amp;jump=close&amp;url=&#39;+encodeURIComponent(location.href)+&#39;&amp;title=&#39;+encodeURIComponent(document.title));"><img src="./Creating a Manifest for a Chrome Store Web App_files/icon_delicious.gif" alt="" width="16" height="16" border="0" class="icon"> del.icio.us</a></li>
+						<li><a href="javascript:void(0)" onclick="javascript:window.open(&#39;http://digg.com/submit?phase=2&amp;url=&#39;+encodeURIComponent(location.href)+&#39;&amp;title=&#39;+encodeURIComponent(document.title)+&#39;&amp;bodytext=&amp;topic=&#39;);"><img src="./Creating a Manifest for a Chrome Store Web App_files/icon_diggthis.gif" alt="" width="16" height="16" border="0" class="icon"> Digg</a></li>
+						<li><a href="javascript:void(0)" onclick="javascript:window.open(&#39;http://slashdot.org/slashdot-it.pl?op=basic&amp;url=&#39;+encodeURIComponent(location.href));"><img src="./Creating a Manifest for a Chrome Store Web App_files/icon_slashdot.gif" alt="" width="16" height="16" border="0" class="icon"> Slashdot</a></li>
+						<li><a href="javascript:void(0)" onclick="javascript:window.open(&#39;http://www.dzone.com/links/add.html?url=&#39;+encodeURIComponent(location.href)+&#39;&amp;title=&#39;+encodeURIComponent(document.title));"><img src="./Creating a Manifest for a Chrome Store Web App_files/icon_dzone.gif" alt="" width="16" height="16" border="0" class="icon"> DZone</a></li>
+						<li><a href="javascript:void(0)" onclick="javascript:window.open(&#39;http://www.stumbleupon.com/submit?url=&#39;+encodeURIComponent(location.href)+&#39;&amp;title=&#39;+encodeURIComponent(document.title));"><img src="./Creating a Manifest for a Chrome Store Web App_files/icon_stumbleit.gif" alt="" width="16" height="16" border="0" class="icon"> StumbleUpon</a></li>
+						<li><a href="javascript:void(0)" onclick="javascript:window.open(&#39;http://friendfeed.com/?url=&#39;+encodeURIComponent(location.href)+&#39;&amp;title=&#39;+encodeURIComponent(document.title));"><img src="./Creating a Manifest for a Chrome Store Web App_files/icon_friendfeed.gif" alt="" width="16" height="16" border="0" class="icon"> FriendFeed</a></li>
+						<li><a href="javascript:void(0)" onclick="javascript:window.open(&#39;http://www.furl.net/storeIt.jsp?t=&#39;+encodeURIComponent(document.title)+&#39;&amp;u=&#39;+encodeURIComponent(location.href));"><img src="./Creating a Manifest for a Chrome Store Web App_files/icon_furl.gif" alt="" width="16" height="16" border="0" class="icon"> Furl</a></li>
+
+						<li><a href="javascript:void(0)" onclick="javascript:window.open(&#39;http://www.newsvine.com/_wine/save?popoff=1&amp;u=&#39;+encodeURIComponent(location.href),&#39;newsvine&#39;,&#39;toolbar=no,width=590,height=600,resizable=yes,scrollbars=yes&#39;);"><img src="./Creating a Manifest for a Chrome Store Web App_files/icon_seednewsvine.gif" alt="" width="16" height="16" class="icon"> Newsvine</a></li>
+						<li><a href="javascript:void(0)" onclick="javascript:window.open(&#39;http://www.google.com/bookmarks/mark?op=edit&amp;bkmk=&#39;+encodeURIComponent(location.href)+&#39;&amp;title=&#39;+encodeURIComponent(document.title));"><img src="./Creating a Manifest for a Chrome Store Web App_files/icon_google.gif" alt="" width="16" height="16" class="icon"> Google</a></li>
+						<li><a href="javascript:void(0)" onclick="javascript:window.open(&#39;http://www.linkedin.com/shareArticle?mini=true&amp;ro=true&amp;url=&#39;+encodeURIComponent(location.href)+&#39;&amp;source=&#39;+encodeURIComponent(document.title));"><img src="./Creating a Manifest for a Chrome Store Web App_files/icon_linkedin.gif" alt="" width="16" height="16" class="icon"> LinkedIn</a></li>
+						<li><a href="javascript:void(0)" onclick="javascript:window.open(&#39;http://www.myspace.com/Modules/PostTo/Pages/?u=&#39;+encodeURIComponent(location.href)+&#39;&amp;t=&#39;+encodeURIComponent(document.title));"><img src="./Creating a Manifest for a Chrome Store Web App_files/icon_myspace.jpg" alt="" width="16" height="16" class="icon"> MySpace</a></li>
+						<li><a href="javascript:void(0)" onclick="javascript:window.open(&#39;http://www.technorati.com/faves?add=&#39;+encodeURIComponent(location.href));"><img src="./Creating a Manifest for a Chrome Store Web App_files/icon_technorati.gif" alt="" width="16" height="16" class="icon"> Technorati</a></li>
+						<li><a href="javascript:void(0)" onclick="javascript:window.open(&#39;https://favorites.live.com/quickadd.aspx?marklet=1&amp;mkt=en-us&amp;top=1&amp;url=&#39;+encodeURIComponent(location.href)+&#39;&amp;title=&#39;+encodeURIComponent(document.title));"><img src="./Creating a Manifest for a Chrome Store Web App_files/icon_windowslive.gif" alt="" width="16" height="16" class="icon"> Windows Live</a></li>
+						<li><a href="javascript:void(0)" onclick="javascript:window.open(&#39;http://buzz.yahoo.com/submit?urlsubmission-input=&#39;+encodeURIComponent(location.href)+&#39;&amp;submitHeadline=&#39;+encodeURIComponent(document.title));"><img src="./Creating a Manifest for a Chrome Store Web App_files/icon_yahoo.gif" alt="" width="16" height="16" class="icon"> YahooBuzz</a></li>
+
+					</ul>
+				<span class="bottom"><span></span></span>
+			</div>
+		</li>
+	</ul>
+</div>
+<script type="text/javascript" src="./Creating a Manifest for a Chrome Store Web App_files/article_menu.js"></script>
+<script type="text/javascript">
+    initArticleMenu(document.getElementById("toolBoxShareMenu"));
+</script>
+    <h1>Creating a Manifest for a Chrome Store Web App</h1>
+
+	
+	 <p id="author">
+        By <a href="http://www.htmlgoodies.com/feedback.php/http://www.htmlgoodies.com/beyond/webmaster/toolbox/article.php/3900531/Creating-a-Manifest-for-a-Chrome-Store-Web-App.htm">Scott Clark</a>
+    </p>
+	
+					
+				
+   
+    
+    <div class="body">
+        <div class="retweet">
+			<iframe src="./Creating a Manifest for a Chrome Store Web App_files/tweet_button.htm" allowtransparency="true" frameborder="0" scrolling="no" class="twitter-share-button twitter-count-vertical" style="width: 55px; height: 62px; " title="Twitter For Websites: Tweet Button"></iframe>
+			<script type="text/javascript" src="./Creating a Manifest for a Chrome Store Web App_files/widgets.js"></script>
+        </div>
+        <div class="likebox">
+			<!--<div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#appId=215275221841763&amp;xfbml=1"></script><fb:like href="" 	send="false" layout="box_count" width="450" show_faces="true" font="arial"></fb:like>-->
+						<iframe src="./Creating a Manifest for a Chrome Store Web App_files/like.htm" scrolling="no" frameborder="0" allowtransparency="true" style="border:none; overflow:hidden; width:55px; height:65px; margin-top:5px; margin-bottom: 0px"></iframe>
+
+			
+     	</div>
+		
+	   In our <a href="http://www.htmlgoodies.com/beyond/webmaster/toolbox/article.php/3900056">last article</a>, we explained the details of creating an <a href="http://www.htmlgoodies.com/beyond/webmaster/toolbox/article.php/3900531/Creating-a-Manifest-for-a-Chrome-Store-Web-App.htm#" id="itxthook0" rel="nofollow" class="itxtrst itxtrsta itxthook" style="font-weight: normal; font-size: 100%; text-decoration: underline; border-bottom-color: rgb(0, 100, 0); border-bottom-style: solid; padding-bottom: 1px; color: rgb(0, 100, 0); background-color: transparent; border-bottom-width: 0.1em; "><span id="itxthook0w0" class="itxtrst itxtrstspan itxthookspan" style="background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: transparent; font-size: inherit; font-weight: inherit; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent; color: rgb(0, 100, 0); background-position: initial initial; background-repeat: initial initial; ">app</span></a> for Google's Chrome Web Store. This time we'll actually create a manifest file, and add the app to Google Chrome, explaining the process along the way.
+
+<h2>Tell Me About a Manifest File</h2>
+
+As we've learned from the Google Chrome <a href="http://code.google.com/chrome/apps/docs/developers_guide.html">Developer's Guide</a>, a manifest is just a file called <i>manifest.json</i> that includes the metadata--that is, data and instructions about the files that are used in the app. 
+<p>
+The manifest can include many parameters, or <i>fields</i>, that are used to define the app. These include some that are required, some that are recommended and others that are entirely optional. Here is the manifest file that we will be using for our sample app:
+</p><pre>{
+  "name": "Internet.com <a href="http://www.htmlgoodies.com/beyond/webmaster/toolbox/article.php/3900531/Creating-a-Manifest-for-a-Chrome-Store-Web-App.htm#" id="itxthook4" rel="nofollow" class="itxtrst itxtrsta itxthook" style="font-weight: normal; font-size: 100%; text-decoration: underline; border-bottom-color: rgb(0, 100, 0); border-bottom-style: solid; padding-bottom: 1px; color: rgb(0, 100, 0); background-color: transparent; border-bottom-width: 0.1em; "><span id="itxthook4w0" class="itxtrst itxtrstspan itxthookspan" style="background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: transparent; font-size: inherit; font-weight: inherit; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent; color: rgb(0, 100, 0); background-position: initial initial; background-repeat: initial initial; ">Network</span></a>",
+  "description": "The IT Professionals Resource",
+  "version": "1",
+  "app": {
+    "launch": {
+      "local_path": "index.html"
+    }
+  },
+  "icons": {
+    "24": "icon_24.png",
+    "128": "icon_128.png"
+  },
+  "permissions": [
+    "unlimited_storage",
+    "notifications"
+  ]
+}
+</pre>
+
+<h2>Required Manifest Fields</h2>
+
+<ul>
+<li>name: The name of the <a href="http://www.htmlgoodies.com/beyond/webmaster/toolbox/article.php/3900531/Creating-a-Manifest-for-a-Chrome-Store-Web-App.htm#" id="itxthook5" rel="nofollow" class="itxtrst itxtrsta itxthook" style="font-weight: normal; font-size: 100%; text-decoration: underline; border-bottom-color: rgb(0, 100, 0); border-bottom-style: solid; padding-bottom: 1px; color: rgb(0, 100, 0); background-color: transparent; border-bottom-width: 0.1em; "><span id="itxthook5w0" class="itxtrst itxtrstspan itxthookspan" style="background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: transparent; font-size: inherit; font-weight: inherit; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent; color: rgb(0, 100, 0); background-position: initial initial; background-repeat: initial initial; ">application</span></a>. This is displayed in the web store and in Google Chrome's launcher. 
+</li><li>version: The version of this metadata. Each time you update the metadata this number must be incremented. Up to four dot-separated integers are allowed. 
+</li><li>app: The URLs that the app uses. 
+</li></ul>
+
+The app field itself has many parameters, including some that are required, specifically the <i>urls</i> field, which is required for hosted <a href="http://www.htmlgoodies.com/beyond/webmaster/toolbox/article.php/3900531/Creating-a-Manifest-for-a-Chrome-Store-Web-App.htm#" id="itxthook1" rel="nofollow" class="itxtrst itxtrsta itxthook" style="font-weight: normal; font-size: 100%; text-decoration: underline; border-bottom-color: rgb(0, 100, 0); border-bottom-style: solid; padding-bottom: 1px; color: rgb(0, 100, 0); background-color: transparent; border-bottom-width: 0.1em; "><span id="itxthook1w0" class="itxtrst itxtrstspan itxthookspan" style="background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: transparent; font-size: inherit; font-weight: inherit; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent; color: rgb(0, 100, 0); background-position: initial initial; background-repeat: initial initial; ">apps</span></a> (but omitted for packaged apps), and <i>browse_urls</i> which is optional for hosted apps, (and is also omitted for packaged apps). The urls field are actually the live urls that are used by the app, while browse_urls are urls that a user can navigate to without leaving the app. 
+<p>
+Another field used by the app field is <i>launch</i>, which tells the browser what is going to happen when the app is launched in the Chrome browser. You can use additional parameters along with launch to describe the <i>web_url</i> of hosted apps (and is required for hosted apps), the <i>local_path</i>, which is required for packaged apps (and omitted from local apps). Other parameters include the <i>container</i> field, which enables you to specify a panel or tab where the app will appear (tab is selected by default), and <i>height</i> and <i>width</i>, which are optional and describe the height and width of the panel, if the container is set to use one.
+</p><p>
+The next field is <i>icons</i>, another optional field that is used to define the icon that appears on the tab when an app is added, and the icon that shows up within the launcher. It is recommended to include the icons, as they provide the user with a way to recognize your app on their tab or launcher. 
+</p><p>
+Other fields to be aware of include the following:
+</p><ul>
+<li>key - This is the public key value for your app, which is usually automatically set when the .crx file is created when you are uploading your app to the Chrome Web Store.
+</li><li>minimum_chrome_version - This is the version of Google Chrome that the app requires in order to function. 
+</li><li>permissions - This can be a combination of "geolocation", "notifications", and "unlimited_storage".
+</li><li>update_url - This is the XML file that is used to <a href="http://code.google.com/chrome/extensions/autoupdate.html">autoupdate</a> an app, and is only specified if you host your own autoupdates.
+</li></ul>
+
+<h2>Our Sample Chrome Store App</h2>
+
+For our sample application, we've basically just created a <a href="http://www.htmlgoodies.com/beyond/webmaster/toolbox/article.php/3900531/Creating-a-Manifest-for-a-Chrome-Store-Web-App.htm#" id="itxthook2" rel="nofollow" class="itxtrst itxtrsta itxthook" style="font-weight: normal; font-size: 100%; text-decoration: underline; border-bottom-color: rgb(0, 100, 0); border-bottom-style: solid; padding-bottom: 1px; color: rgb(0, 100, 0); background-color: transparent; border-bottom-width: 0.1em; "><span id="itxthook2w0" class="itxtrst itxtrstspan itxthookspan" style="background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: transparent; font-size: inherit; font-weight: inherit; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent; color: rgb(0, 100, 0); background-position: initial initial; background-repeat: initial initial; ">mobile</span></a> version of <a href="http://www.internet.com/">internet.com</a>, in fact, using the <a href="http://www.htmlgoodies.com/beyond/webmaster/toolbox/article.php/3896706">iWebkit</a> that we used to create apps for the iPhone and iPad. All we had to do was to create a manifest file that specified the name, description, local path and icons (along with the launch url). You can see how the manifest file appears in the sample code shown above. Then we edited two .png icon images from a previous iPhone app to work with a Chrome app by changing their sizes to 24x24 pixels for the icon that is shown in the app tab, and 128x128 pixels for the icon that is shown in the launcher. We placed them all in the same directory (the manifest file and two icons), and proceeded to add them to Chrome as an extension. 
+
+<h2>How Does It Work In Chrome?</h2>
+First, remember that you have to be using the Dev channel release of Google Chrome as we discussed in our <a href="http://www.htmlgoodies.com/beyond/webmaster/toolbox/article.php/3900056">previous article</a>. Assuming you've copied your manifest file and two icons to a folder for your app, you simply add them as an extension by opening the extensions <a href="http://www.htmlgoodies.com/beyond/webmaster/toolbox/article.php/3900531/Creating-a-Manifest-for-a-Chrome-Store-Web-App.htm#" id="itxthook3" rel="nofollow" class="itxtrst itxtrsta itxthook" style="font-weight: normal; font-size: 100%; text-decoration: underline; border-bottom-color: rgb(0, 100, 0); border-bottom-style: solid; padding-bottom: 1px; color: rgb(0, 100, 0); background-color: transparent; border-bottom-width: 0.1em; "><span id="itxthook3w0" class="itxtrst itxtrstspan itxthookspan" style="background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: transparent; font-size: inherit; font-weight: inherit; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent; color: rgb(0, 100, 0); background-position: initial initial; background-repeat: initial initial; ">management</span></a> page, clicking the Tools menu and choosing Tools &gt; Extensions. Then you'll see several buttons for <i>loading an unpacked extension</i>, <i>pack an extension</i> and <i>update an extension</i>--you will want to select <i>Load unpacked extension</i>. When you do that, it will allow you to select the folder where you placed the three files for your app. Once you've done that, your new app/extension icon will show up whenever you open a new tab. Clicking it will open your app in the browser, and will show your smaller icon on the tab at the top of the browser.  Here's what we see when we open a new tab:
+<p>
+<img src="./Creating a Manifest for a Chrome Store Web App_files/chrome_app.jpg">
+</p><p>
+And here's what we see when we actually open the app, which is also pretty much how it appears if it is viewed in an iPad or iPhone:
+</p><p>
+<img src="./Creating a Manifest for a Chrome Store Web App_files/chrome_app2.jpg">
+</p><p>
+Next time we're going to turn our local app into a packaged app so you can download and try it out yourself!        
+            </p></div>
+
+    <a name="comment_form"></a>
+    <div id="ce-comments">
+        <script type="text/javascript" src="./Creating a Manifest for a Chrome Store Web App_files/jquery.min(1).js"></script>
+        <script type="text/javascript" src="./Creating a Manifest for a Chrome Store Web App_files/recaptcha_ajax.js"></script>
+
+        <script src="./Creating a Manifest for a Chrome Store Web App_files/facebox.js" type="text/javascript"></script>
+        <script type="text/javascript">var blurbKey = 5626470;</script>
+        <script type="text/javascript" src="./Creating a Manifest for a Chrome Store Web App_files/ce_comments.js"></script>
+        <p class="comment-actions"><a href="http://www.htmlgoodies.com/beyond/webmaster/toolbox/article.php/3900531/Creating-a-Manifest-for-a-Chrome-Store-Web-App.htm#comment-formbox" class="comment-reply">Make a Comment</a></p>
+        
+    <ul><li><div class="comment"><h3><span class="byline"><a href="http://aerobicsdepot.com/">Treadmill</a></span><span class="datetime">said on August 29, 2010 at 5:40 am</span></h3><p class="comment-body">Very good tutorial thanks helped me a lot!</p><p class="comment-actions"><a href="http://www.htmlgoodies.com/beyond/webmaster/toolbox/article.php/3900531/Creating-a-Manifest-for-a-Chrome-Store-Web-App.htm#comment-formbox" id="comment-215810" class="comment-reply">Reply</a></p></div></li></ul></div>
+</div>
+                    </div>
+
+                    <div id="right-col" class="yui3-cssreset">
+                        <ul>
+                            <li>
+                                <div id="newsletter-signup">
+										<div><h4>Web Development Newsletter Signup</h4></div>
+										<div class="nl_hide"><input type="text" value="" id="nl_email"></div>
+                                        <div class="nl_hide"><button type="submit" onclick="javascript:doNLSubmit();" title="Signup Now!">Submit</button></div>
+										<div class="nl_hide" id="nl_error">Invalid email</div>
+										<div class="nl_message">You have successfuly registered to our newsletter.</div>
+                                </div>
+								<!--<div><a href="http://e-newsletters.internet.com/earthweb_opt-in.html">Other Related Newsletters</a></div>-->
+                            </li>
+                            <li><!-- CLASS-METHOD=content/article_legacy --><!--
+AD position = K
+OAS eqv. = 336x280
+QUAD pos = Bob-FLEX(BOB)POS(TOP)
+QUAD path = www.htmlgoodies.com/beyond/webmaster www.htmlgoodies.com/beyond/reference www.htmlgoodies.com/beyond/master www.htmlgoodies.com/primers/ad_banners www.htmlgoodies.com/introduction/newsletter_archive/goodiestogo www.htmlgoodies.com/introduction/newsletter_archive/design www.htmlgoodies.com/beyond/webmaster/toolbox www.htmlgoodies.com/beyond/webmaster/projects
+Page type = other
+-->
+<script language="JavaScript">
+zzfocrender("203", "9517", "715807/656893/656882/656671/581034", "6", "125", "125", "", "", "");</script><script language="JavaScript" src="./Creating a Manifest for a Chrome Store Web App_files/i0(3).js"></script><script language="JavaScript" src="./Creating a Manifest for a Chrome Store Web App_files/i(3).js"></script><a href="http://o1.qnsr.com//cgi/c?a=20167741;x=2304;c=203715807,203715807;i=0;n=203;s=9517;p=21086028;q=1;WT.qs_dlk=XnYNBArIZzwAABTTmdoAAAAi&;;y=http://www.htmlgoodies.com/beyond/webmaster/toolbox/article.php/3900531/Creating-a-Manifest-for-a-Chrome-Store-Web-App.htm;;e=i;s=9517;g=78;w=9;m=0;WT.qs_dlk=XnYNBArIZzwAABTTmdoAAAAi&;z=270354199;k=http://www.devx.com/MSDN/Link/46629" target="_blank" onmouseover="window.status=&#39;&#39;; return true;" onmouseout="window.status=&#39;&#39;; return true;"><img src="./Creating a Manifest for a Chrome Store Web App_files/118775_JumpList_Bob.jpg" border="0" alt="Click Here!"></a>
+<noscript>
+&lt;a href="http://o1.qnsr.com/cgi/r?WT.qs_dlk=XnYNBArIZzwAABTTmdoAAAAi;;;n=203;c=715807/656893/656882/656671/581034;s=9517;x=1536;f=8741098289;u=j;z=20110813020811" target="_blank"&gt;
+&lt;img border="0" width="125" height="125" src="http://o1.qnsr.com/cgi/x?;n=203;c=715807/656893/656882/656671/581034;s=9517;x=1536;f=8741098289;u=j;z=20110813020811" alt="Click here"&gt;&lt;/a&gt;
+</noscript>
+</li>
+                            <li><!-- CLASS-METHOD=content/article_legacy --><!--
+AD position = O
+OAS eqv. = flex
+QUAD pos = Bob-FLEX(BOB)POS(MIDDLE)
+QUAD path = www.htmlgoodies.com/beyond/webmaster www.htmlgoodies.com/beyond/reference www.htmlgoodies.com/beyond/master www.htmlgoodies.com/primers/ad_banners www.htmlgoodies.com/introduction/newsletter_archive/goodiestogo www.htmlgoodies.com/introduction/newsletter_archive/design www.htmlgoodies.com/beyond/webmaster/toolbox www.htmlgoodies.com/beyond/webmaster/projects
+Page type = other
+-->
+<script language="JavaScript">
+zzfocrender("203", "9517", "656902/656893/656882/656671/581034", "9", "300", "250", "", "", "");</script><script language="JavaScript" src="./Creating a Manifest for a Chrome Store Web App_files/i0(4).js"></script><script language="JavaScript" src="./Creating a Manifest for a Chrome Store Web App_files/i(4).js"></script><iframe src="./Creating a Manifest for a Chrome Store Web App_files/B5662507.htm" width="300" height="250" frameborder="0" border="0" marginwidth="0" marginheight="0" scrolling="no" align="top"></iframe>
+<noscript>
+&lt;a href="http://o1.qnsr.com/cgi/r?WT.qs_dlk=XnYNBArIZzwAABTTmdoAAAAi;;;n=203;c=656902/656893/656882/656671/581034;s=9517;x=2304;f=2603362445;u=j;z=20110813020811" target="_blank"&gt;
+&lt;img border="0" width="300" height="250" src="http://o1.qnsr.com/cgi/x?;n=203;c=656902/656893/656882/656671/581034;s=9517;x=2304;f=2603362445;u=j;z=20110813020811" alt="Click here"&gt;&lt;/a&gt;
+</noscript>
+</li>
+							<!-- Code to put on site page to show pinning option --> 
+<script type="text/javascript" language="javascript">
+
+	if($.browser.msie){
+		if(document.documentMode != undefined && document.documentMode==9){
+			if (!window.external.msIsSiteMode()) {
+				document.write('<div id="pinMeContainer"><img class="msPinSite" style="cursor: move;" src="/img/htmlgoodies_logo.jpg" height="100" weight="100" /><br/><span id="pinMe">To Pin this site, drag this image above to your Windows Taskbar. Try it now!</span></div>'); 
+			}else {
+					try {
+					  if (window.external.msIsSiteMode()) {
+							$.get('http://www.htmlgoodies.com/latest_articles/3/'+Math.round(Math.random()*1000000000000), function(data){
+								displayLatestNews(data);
+							});
+					  }
+				  } catch (ex) { }
+			}
+		}else{
+			document.write('<div id="pinMeContainer"><img class="msPinSite" src="/img/htmlgoodies_logo.jpg" height="65" weight="65" /><br/><span id="pinMe">Upgrade your browser to IE 9 to see the power of Site Pinning!</span></div>'); 	
+		}
+	}
+	function displayLatestNews(data){
+		try{
+			g_ext = window.external;
+			if(data.articles != undefined && data.articles.length){
+				g_ext.msSiteModeClearJumpList();
+				g_ext.msSiteModeCreateJumplist('HTMLGoodies Latest News');
+				for(i=0; i<data.articles.length; i++){
+				  g_ext.msSiteModeAddJumpListItem (data.articles[i].title, data.articles[i].link, 'http://www.htmlgoodies.com/favicon.ico');
+				}
+				var dt = new Date();
+				var updated = (dt.getMonth()+1) +"/"+(dt.getDay()+1)+"/"+dt.getFullYear()+" "+dt.toLocaleTimeString();
+				
+				g_ext.msSiteModeAddJumpListItem ('Last updated - '+updated, 'http://www.htmlgoodies.com/html5/index.php', 'http://www.htmlgoodies.com/img/refresh.ico');
+				g_ext.msSiteModeShowJumpList();
+			}
+		}catch(ex){ }
+	}
+</script>
+<!-- End of code to put on site page to show pinning option -->  
+                                                        <li><div class="related-articles">
+    <h3>Related Articles</h3>
+    <ul>
+                <li><a href="http://www.htmlgoodies.com/beyond/webmaster/toolbox/article.php/3900056/Creating-a-Web-App-for-Googles-Chrome-Web-Store.htm">Creating a Web App for Google's Chrome Web Store</a></li>
+            </ul>
+</div>
+</li>
+                                                    </ul>
+                    </div>
+					<span class="yui3-cssreset">
+                    					</span>
+                </div>
+            </div>
+
+            <div id="footer" class="yui3-cssreset">
+                <div class="sda"><!-- CLASS-METHOD=content/article_legacy --><!--
+AD position = H
+OAS eqv. = 468x60-2
+QUAD pos = Leo-FLEX(LEO)POS(BOTTOM)
+QUAD path = www.htmlgoodies.com/beyond/webmaster www.htmlgoodies.com/beyond/reference www.htmlgoodies.com/beyond/master www.htmlgoodies.com/primers/ad_banners www.htmlgoodies.com/introduction/newsletter_archive/goodiestogo www.htmlgoodies.com/introduction/newsletter_archive/design www.htmlgoodies.com/beyond/webmaster/toolbox www.htmlgoodies.com/beyond/webmaster/projects
+Page type = other
+-->
+<script language="JavaScript">
+zzfocrender("203", "9517", "656898/656893/656882/656671/581034", "14", "728", "90", "", "", "");</script><script language="JavaScript" src="./Creating a Manifest for a Chrome Store Web App_files/i0(5).js"></script><script language="JavaScript" src="./Creating a Manifest for a Chrome Store Web App_files/i(5).js"></script><iframe src="./Creating a Manifest for a Chrome Store Web App_files/B5662507(2).htm" width="728" height="90" frameborder="0" border="0" marginwidth="0" marginheight="0" scrolling="no" align="top"></iframe>
+<noscript>
+&lt;a href="http://o1.qnsr.com/cgi/r?WT.qs_dlk=XnYNBArIZzwAABTTmdoAAAAi;;;n=203;c=656898/656893/656882/656671/581034;s=9517;x=3584;f=5752959696;u=j;z=20110813020811" target="_blank"&gt;
+&lt;img border="0" width="728" height="90" src="http://o1.qnsr.com/cgi/x?;n=203;c=656898/656893/656882/656671/581034;s=9517;x=3584;f=5752959696;u=j;z=20110813020811" alt="Click here"&gt;&lt;/a&gt;
+</noscript>
+</div>
+                
+<!--<div class="konafilter"> -->
+<div> 
+
+<!-- Default Insight Tag -->
+<script type="text/javascript">
+  var _bizo_data_partner_id = "131";
+  var site_list = new Array("www.serverwatch.com", "www.smallbusinesscomputing.com", "www.hardwarecentral.com",
+                            "www.enterprisenetworkingplanet.com", "www.developer.com", "www.internetnews.com",
+			    "www.voipplanet.com","www.codeguru.com", "itmanagement.earthweb.com", "www.databasejournal.com",
+                            "www.esecurityplanet.com", "www.enterprisestorageforum.com", "www.cioupdate.com",
+                            "www.enterprisemobiletoday.com", "www.earthweb.com", "www.htmlgoodies.com",
+                            "www.webdeveloper.com", "www.vbforums.com", "search.internet.com",
+                            "www.linuxtoday.com", "flashkit.com", "e-newsletters.internet.com",
+                            "member.internet.com", "www.webopedia.com", "www.internet.com", "devx.com"
+                           );
+  var do_call = false;
+  for(var i = 0; i < site_list.length; i++) {
+     var txt=new RegExp(site_list[i]);
+     if (txt.test(document.location) == true) do_call = true;
+  }
+  if (do_call) {
+      var _bizo_p = (("https:" == document.location.protocol) ? "https://sjs." : "http://js.");
+      document.write(unescape("%3Cscript src='" + _bizo_p + "bizographics.com/convert_data.js?partner_id=" + _bizo_data_partner_id + "' type='text/javascript'%3E%3C/script%3E"));
+  }
+</script><script src="./Creating a Manifest for a Chrome Store Web App_files/convert_data.js" type="text/javascript"></script><script type="text/javascript" language="javascript" src="./Creating a Manifest for a Chrome Store Web App_files/saved_resource"></script><img border="0" alt="" style="display:none;" width="1" height="1" src="./Creating a Manifest for a Chrome Store Web App_files/datapair" id="_bizo.ids.pixels"><iframe id="_bizo_partner_frame_224" width="0" height="0" src="./Creating a Manifest for a Chrome Store Web App_files/partner.htm" onload="_bizo_pixel_counter(&#39;224&#39;, 1313226479286);" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe><img border="0" alt="" style="display:none;" width="1" height="1" src="./Creating a Manifest for a Chrome Store Web App_files/seg" onload="_bizo_pixel_counter(&#39;155&#39;, 1313226479288);"><img border="0" alt="" style="display:none;" width="1" height="1" src="./Creating a Manifest for a Chrome Store Web App_files/pixel" onload="_bizo_pixel_counter(&#39;85&#39;, 1313226479290);"><img border="0" alt="" style="display:none;" width="1" height="1" src="./Creating a Manifest for a Chrome Store Web App_files/918" onload="_bizo_pixel_counter(&#39;221&#39;, 1313226479291);">
+<!-- Google Analytics -->
+<script src="./Creating a Manifest for a Chrome Store Web App_files/ga(1).js" type="text/javascript">
+</script>
+<script type="text/javascript">
+<!--     hide from no js browsers
+delete Array.prototype.itemValidation;
+delete Array.prototype.isArray;
+var superTracker = _gat._getTracker("UA-2838492-1");
+superTracker._initData();
+superTracker._trackPageview();
+
+-->
+</script>
+<script type="text/javascript">
+   var site_name =  location.hostname;
+   if ( site_name.indexOf("www.") != 0 ) {
+	   if(site_name.indexOf("dev-")==0){
+		site_name  = site_name.replace('dev-','');
+	   }
+	   else{
+	   	site_name  = "www."+site_name ;
+		}
+   }
+   document.write("<SCR" + "IPT LANGUAGE='JavaScript1.2' SRC='/icom_includes/footers/sites/"+ site_name +".js' TYPE='text/javascript'><\/SCR" + "IPT>");
+-->
+</script><script language="JavaScript1.2" src="./Creating a Manifest for a Chrome Store Web App_files/www.htmlgoodies.com.js" type="text/javascript"></script>
+<script type="text/javascript">
+<!--     hide from no js browsers
+   pageTracker._initData();
+   pageTracker._trackPageview();
+   // -->
+</script>
+<!-- End Google Analytics -->
+<!-- Revenue Science API -->
+
+
+<!-- Revenue Science API -->
+
+
+
+
+<!-- Revenue Science API -->
+
+
+
+<style type="text/css">
+@charset "UTF-8";
+/* CSS Document */
+
+
+/* JOM CSS */
+
+#jomfooter {
+	border: 0;
+	margin: 5px;
+	padding: 5px;
+	}
+
+#jomfooter * {
+	font-family: Arial, Helvetica, sans-serif;
+	padding: 0;
+	margin: 0;
+	}
+
+#jomfooter img {
+	border: 0;
+	behavior: url('/icom_includes/footers/css/iepngfix.htc');
+	padding: 5px;
+	padding: expression('0');
+	}
+
+#jomfooter p {
+	font-size: 11px;
+	line-height: 20px;
+	margin: 10px;
+	}
+
+#jomfooter form b {
+	font-size: 12px;
+	}
+
+#jomfooter a {
+	text-decoration: underline;
+	}
+
+#jomfooter a:hover {
+	text-decoration: none;
+	}
+
+#jomfooter table td {
+	border: 0;
+	}
+
+
+/* GEMS Solutions CSS */
+
+#jomfooter #solsect {
+	margin: 0 auto;
+	padding: 10px 0;
+	width: 720px;
+	}
+
+#jomfooter #solsect .top {
+	background: url('/icom_includes/footers/soltopbg.gif') repeat-x #bbb;
+	height: 26px;
+	margin-bottom: 1px;
+	}
+
+#jomfooter #solsect .top a {
+	font-size: 16px;
+	font-weight: bold;
+	color:#333;
+	text-decoration:none;
+	margin-left: 5px;
+	padding: 0;
+	line-height: 25px;
+	}
+
+#jomfooter #solsect .top a:hover {
+	text-decoration: none;
+	}
+
+#jomfooter #solsect .solsectpad {
+	background: #fff;
+	}
+
+#jomfooter #solsect .solsectpad .main {
+	background:url('/icom_includes/footers/solmidbg.gif') repeat-x #e7e8e3;
+	padding: 5px;
+	margin-bottom: 1px;
+	}
+
+#jomfooter #solsect .solsectpad .main h2 {
+	font-size: 12px;
+	color: #000;
+	font-weight: normal;
+	padding-bottom: 3px;
+	}
+
+#jomfooter #solsect a {
+	color: #333;
+	font-size: 10px;
+	text-decoration: none;
+	line-height: 13px;
+	}
+
+#jomfooter #solsect a:hover {
+	text-decoration: underline;
+	}
+</style>
+
+
+
+
+<!-- Begin JOM Footer -->
+
+
+<div id="jomfooter" align="center">
+<p><a href="http://www.internet.com/"><img src="./Creating a Manifest for a Chrome Store Web App_files/icom_logo_qsfooter.png" alt="Internet.com" width="240" height="40" hspace="0" border="0"></a><br>
+    The Network for Technology Professionals</p>
+<form method="POST" action="http://search.internet.com/www.jupiterweb.com" target="_top">        
+      <input type="HIDDEN" name="IC_Summary" value="1">
+        <input type="HIDDEN" name="IC_StartNumber" value="0">
+        <input type="HIDDEN" name="IC_BatchSize" value="10">
+        <input type="HIDDEN" name="IC_RelevanceThreshold" value="50">
+        <input type="hidden" name="IC_QueryDatabase" value="all">
+        <strong>Search:</strong> 
+        <input type="text" name="IC_QueryText" size="45">
+
+        <input type="image" border="0" value="Find" name="SUBMIT" src="./Creating a Manifest for a Chrome Store Web App_files/but_find.gif" width="41" height="20" align="absmiddle">
+  </form>
+    <p>
+        <a target="_blank" rel="nofollow" href="http://www.internet.com/Internetcom/Door/41188"> About Internet.com</a> 
+        <br>
+      <script type="text/javascript">
+            document.write(' Copyright ');
+            var today = new Date();
+            document.write(  + today.getFullYear());
+            document.write(' QuinStreet Inc. All Rights Reserved.');
+        </script> Copyright 2011 QuinStreet Inc. All Rights Reserved.
+  <noscript>
+        Copyright 2010 QuinStreet Inc. All Rights Reserved.
+  </noscript>
+
+  </p>
+       <p> <a target="_blank" rel="nofollow" href="http://www.internet.com/Internetcom/Door/41187">Legal Notices</a>, <a target="_blank" rel="nofollow" href="http://www.internet.com/Internetcom/Door/41189#Licensing1">Licensing</a>, <a target="_blank" rel="nofollow" href="http://www.internet.com/Internetcom/Door/41189#Permissions">Permissions</a>, <a target="_blank" rel="nofollow" href="http://www.internet.com/Internetcom/Door/41186">Privacy  Policy</a>.
+        <br>
+
+        <a target="_blank" rel="nofollow" href="http://www.internet.com/mediakit/">Advertise</a> | <a target="_blank" rel="nofollow" href="http://e-newsletters.internet.com/">Newsletters</a> |  <a target="_blank" rel="nofollow" href="http://e-newsletters.internet.com/announcement_list.html">E-mail Offers</a>
+  </p>
+
+
+<!-- start solutions links section -->
+    <div id="solsect">
+        <div class="top" align="left"><a href="http://www.htmlgoodies.com/beyond/webmaster/toolbox/article.php/3900531/Creating-a-Manifest-for-a-Chrome-Store-Web-App.htm#">Solutions</a></div>
+        <div class="solsectpad">
+                        <div class="main" align="left">
+                                <h2>Whitepapers and eBooks</h2>
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tbody><tr>
+                        <td width="50%" valign="top" align="left">
+                                                        <a target="_blank" href="http://www.devx.com/MSDN/Door/40684">MSDN Spotlight for Developers</a><br>
+                                                                                                                                 <a target="_blank" href="http://www.devx.com/MS_Azure/Door/41806">Internet.com Cloud Computing Showcase</a><br>
+                                                                                                                                 <a target="_blank" href="http://www.devx.com/MS_TechNet/Door/41641">Microsoft TechNet Spotlight</a><br>
+                                                                               </td>
+                        <td width="10"> </td>
+                        <td width="50%" valign="top" align="left">
+                                                                                                                              <a target="_blank" href="http://www.internet.com/IBM_Cloud/Door/42153">Helpful Cloud Computing Resources</a><br>
+                                                                                                                                 <a target="_blank" href="http://www.devx.com/solutions">MORE WHITEPAPERS, EBOOKS, AND ARTICLES</a><br>
+                                                                                                                             </td>
+                    </tr>
+                </tbody></table>
+            </div>
+                        <div class="main" align="left">
+                                <h2>Webcasts</h2>
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tbody><tr>
+                        <td width="50%" valign="top" align="left">
+                                                        <a target="_blank" href="http://www.devx.com/solutions">MORE WEBCASTS, PODCASTS, AND VIDEOS</a><br>
+                                                                               </td>
+                        <td width="10"> </td>
+                        <td width="50%" valign="top" align="left">
+                                                                                                                          </td>
+                    </tr>
+                </tbody></table>
+            </div>
+                        <div class="main" align="left">
+                                <h2>Downloads and eKits</h2>
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tbody><tr>
+                        <td width="50%" valign="top" align="left">
+                                                        <a target="_blank" href="http://www.devx.com/solutions">MORE DOWNLOADS, EKITS, AND FREE TRIALS</a><br>
+                                                                               </td>
+                        <td width="10"> </td>
+                        <td width="50%" valign="top" align="left">
+                                                                                                                          </td>
+                    </tr>
+                </tbody></table>
+            </div>
+                        <div class="main" align="left">
+                                <h2>Tutorials and Demos</h2>
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tbody><tr>
+                        <td width="50%" valign="top" align="left">
+                                                        <a target="_blank" href="http://j.jiuyt.com/cgi/r?WT.qs_dlk=XnYNBArIZzwAABTTmdoAAAAi;;;n=203;c=641891;s=9272;x=7936;f=201007211453560;u=j;z=TIMESTAMP;q=1;site=footer">Demo: Google Site Search</a><br>
+                                                                                                                                 <a target="_blank" href="http://c.cullr.com/cgi/r?WT.qs_dlk=XnYNBArIZzwAABTTmdoAAAAi;;;n=203;c=621007;s=9272;x=7936;f=201006141238400;u=j;z=TIMESTAMP;q=1;site=footer">Virtual Event: Master Essential Techniques for Leveraging the Cloud</a><br>
+                                                                                                                                 <a target="_blank" href="http://g.gituy.com/cgi/r?WT.qs_dlk=XnYNBArIZzwAABTTmdoAAAAi;;;n=203;c=613996;s=9272;x=7936;f=201005281805430;u=j;z=TIMESTAMP;q=1;site=footer">Article: Explore Application Lifecycle Management Tools in Visual Studio 2010</a><br>
+                                                                                                                                 <a target="_blank" href="http://www.devx.com/HotList/Link/40644">Internet.com Hot List: Get the Inside Scoop on IT and Developer Products</a><br>
+                                                                               </td>
+                        <td width="10"> </td>
+                        <td width="50%" valign="top" align="left">
+                                                                                                                              <a target="_blank" href="http://k.kloiy.com/cgi/r?WT.qs_dlk=XnYNBArIZzwAABTTmdoAAAAi;;;n=203;c=598138;s=9272;x=7936;f=201005100820070;u=j;z=TIMESTAMP;q=1;site=footer">New Security Solutions Using Intel(R) vPro(TM) Technology</a><br>
+                                                                                                                                 <a target="_blank" href="http://www.devx.com/ebook/Article/39031">All About Botnets</a><br>
+                                                                                                                                 <a target="_blank" href="http://www.devx.com/solutions">MORE TUTORIALS, DEMOS AND STEP-BY-STEP GUIDES</a><br>
+                                                                                                                             </td>
+                    </tr>
+                </tbody></table>
+            </div>
+                    </div>
+    </div>
+<!-- end solutions links section -->
+
+
+</div>
+
+<!--</div> -->
+
+            </div>
+        </div>
+    <!-- start Vibrant Media IntelliTXT script section -->
+    <script type="text/javascript" src="./Creating a Manifest for a Chrome Store Web App_files/front.asp"></script>
+    <!-- end Vibrant Media IntelliTXT script section -->
+	<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24939112-1']);
+  _gaq.push(['_setDomainName', 'none']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+ (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>    
+    <script language="JavaScript" type="text/javascript">
+	var gDomain="www.qsstats.com";
+	var gDcsId="dcs37pv2c00000oun93vypyva_4k6d";
+	var gFpc="WT_FPC";
+	var gConvert=true;
+	var gFpcDom = "htmlgoodies.com";
+	if ((typeof(gConvert) != "undefined") && gConvert && (document.cookie.indexOf(gFpc + "=") == -1) && (document.cookie.indexOf("WTLOPTOUT=")==-1)) {
+	    document.write("<SCR"+"IPT TYPE='text/javascript' SRC='http"+(window.location.protocol.indexOf('https:')==0?'s':'')+"://"+gDomain+"/"+gDcsId+"/wtid.js"+"'><\/SCR"+"IPT>");
+	}
+	function dcsAdditionalParameters() {}
+    </script><script type="text/javascript" src="./Creating a Manifest for a Chrome Store Web App_files/wtid.js"></script>
+
+    <script type="text/javascript" src="./Creating a Manifest for a Chrome Store Web App_files/webtrends.js"></script>
+
+    <noscript>&lt;img alt="" border="0" name="DCSIMG" width="1" height="1" src="http://www.qsstats.com/dcs37pv2c00000oun93vypyva_4k6d/njs.gif?dcsuri=/nojavascript&amp;amp;WT.js=No&amp;amp;WT.tv=8.0.2" /&gt;</noscript>
+
+
+
+</div><div id="itxtttholder" style="z-index: 9900000; position: absolute; top: 0; left:0;" class="itxtrst itxtrstdiv"><div id="itxttt" class="itxtrst itxtrstdiv minimise" style="z-index: 9910000; width: 300px; height: 300px; left: -1000px; top: -1000px; display: none; visibility: hidden; "><div id="itxtshadow" class="itxtrst itxtrstdiv" style="width: 312px; height: 311px; display: none; visibility: hidden; "><div class="itxtrst itxtrstdiv itxtshdw itxttl" style="top: 22px; left: 0px; width: 50px; height: 145px; "><div style="width: 765px; height: 641px; opacity: 1; " class="itxtrst itxtrstdiv"><img src="./Creating a Manifest for a Chrome Store Web App_files/lg_shadow_sprite.png" width="765" height="641" class="itxtrst itxtrstimg"></div></div><div class="itxtrst itxtrstdiv itxtshdw itxtbl" style="top: 167px; left: 0px; width: 50px; height: 144px; "><div style="width: 765px; height: 641px; top: -368px; opacity: 1; " class="itxtrst itxtrstdiv"><img src="./Creating a Manifest for a Chrome Store Web App_files/lg_shadow_sprite.png" width="765" height="641" class="itxtrst itxtrstimg"></div></div><div class="itxtrst itxtrstdiv itxtshdw itxttr" style="top: 22px; left: 262px; width: 50px; height: 145px; "><div style="width: 765px; height: 641px; opacity: 1; " class="itxtrst itxtrstdiv"><img src="./Creating a Manifest for a Chrome Store Web App_files/lg_shadow_sprite.png" width="765" height="641" class="itxtrst itxtrstimg"></div></div><div class="itxtrst itxtrstdiv itxtshdw itxtbr" style="top: 167px; left: 262px; width: 50px; height: 144px; "><div style="width: 765px; height: 641px; top: -368px; opacity: 1; " class="itxtrst itxtrstdiv"><img src="./Creating a Manifest for a Chrome Store Web App_files/lg_shadow_sprite.png" width="765" height="641" class="itxtrst itxtrstimg"></div></div><div class="itxtrst itxtrstdiv itxtshdw itxttm" style="top: 22px; left: 108px; width: 154px; height: 145px; "><div style="width: 765px; height: 641px; opacity: 1; " class="itxtrst itxtrstdiv"><img src="./Creating a Manifest for a Chrome Store Web App_files/lg_shadow_sprite.png" width="765" height="641" class="itxtrst itxtrstimg"></div></div><div class="itxtrst itxtrstdiv itxtshdw itxtbm" style="top: 167px; left: 50px; width: 212px; height: 144px; "><div style="width: 765px; height: 641px; top: -368px; opacity: 1; " class="itxtrst itxtrstdiv"><img src="./Creating a Manifest for a Chrome Store Web App_files/lg_shadow_sprite.png" width="765" height="641" class="itxtrst itxtrstimg"></div></div><div class="itxtrst itxtrstdiv itxtshdw itxtfill" style="top: 36px; left: 50px; width: 58px; height: 131px; "><div style="width: 765px; height: 641px; opacity: 1; " class="itxtrst itxtrstdiv BR"><img src="./Creating a Manifest for a Chrome Store Web App_files/lg_shadow_sprite.png" width="765" height="641" class="itxtrst itxtrstimg"></div></div><div class="itxtrst itxtrstdiv itxtshdw itxttail" style="top: 0px; left: 50px; width: 58px; height: 36px; "><div style="width: 765px; height: 641px; opacity: 1; " class="itxtrst itxtrstdiv BR"><img src="./Creating a Manifest for a Chrome Store Web App_files/lg_shadow_sprite.png" width="765" height="641" class="itxtrst itxtrstimg"></div></div></div><div id="itxtchrome" class="itxtrst itxtrstdiv" style="left: 6px; top: 6px; width: 300px; height: 299px; display: none; visibility: hidden; "><div backgroundcolor="#fbfbfb" id="itxtcontentbg" class="itxtrst itxtrstdiv" style="background-color: rgb(255, 255, 255); width: 300px; height: 250px; top: 43px; "></div><div id="itxtslideout" class="itxtrst itxtrstdiv" style="position: absolute; display: none; visibility: hidden; "><div class="itxtrst itxtrstdiv" style="width: 100%; height: 100%; background-color: rgb(84, 84, 84); opacity: 0.85; border-top-left-radius: 7px 7px; border-top-right-radius: 7px 7px; border-bottom-right-radius: 7px 7px; border-bottom-left-radius: 7px 7px; "></div><div style="position:absolute;left:0;top:0;width:100%;height:21px;line-height:21px;color:white;font-size:11px;font-weight:bold;" class="itxtrst itxtrstdiv"><img src="./Creating a Manifest for a Chrome Store Web App_files/close_off.gif" style="vertical-align:middle;float:right;margin-right:4px;margin-top:4px;" class="itxtrst itxtrstimg"><span style="margin-left: 20px;line-height:21px;" class="itxtrst itxtrstspan">Advertisement</span></div><div style="overflow-x: hidden; overflow-y: hidden; position: absolute; left: 20px; top: 21px; width: 270px; height: 246px; " class="itxtrst itxtrstdiv"></div></div><div id="itxtheader" class="itxtrst itxtrstdiv" style="left: 0px; top: 22px; width: 300px; height: 21px; "><div class="itxtrst itxtrstdiv itxttrc"><a target="_blank" class="itxtrst itxtrsta" href="http://mediakit.internet.com/mediakit/"><img class="itxtrst itxtrstimg itxtvmlogo" src="./Creating a Manifest for a Chrome Store Web App_files/logo_internetdotcom.png" style="visibility: visible; "></a><a target="_blank" class="itxtrst itxtrsta" href="http://mediakit.internet.com/mediakit/"><img class="itxtrst itxtrstimg itxtwhat" src="./Creating a Manifest for a Chrome Store Web App_files/what_off.gif" alt="What&#39;s this?" title="What&#39;s this?" style="visibility: visible; "></a><img class="itxtrst itxtrstimg itxtclose" src="./Creating a Manifest for a Chrome Store Web App_files/close_off(1).gif" alt="Close" title="Close" style="visibility: visible; "></div><div class="itxtrst itxtrstdiv itxttlc" style="visibility: visible; "><div class="itxtrst itxtrstdiv itxtadv">Advertisement</div></div><div class="itxtrst itxtrstdiv itxtcrnhldr"><div class="itxtrst itxtrstdiv itxtcrn" style="background-color: rgb(253, 254, 255); margin-left: 6px; margin-right: 6px; "></div><div class="itxtrst itxtrstdiv itxtcrn" style="background-color: rgb(246, 246, 246); margin-left: 4px; margin-right: 4px; "></div><div class="itxtrst itxtrstdiv itxtcrn" style="background-color: rgb(244, 244, 244); margin-left: 2px; margin-right: 2px; "></div><div class="itxtrst itxtrstdiv itxtcrn" style="background-color: rgb(241, 240, 240); margin-left: 2px; margin-right: 2px; "></div><div class="itxtrst itxtrstdiv itxtcrn" style="background-color: rgb(238, 237, 238); margin-left: 1px; margin-right: 1px; "></div><div class="itxtrst itxtrstdiv itxtcrn" style="background-color: rgb(236, 236, 236); margin-left: 1px; margin-right: 1px; "></div><div class="itxtrst itxtrstdiv itxtcrn" style="background-color: rgb(235, 235, 234); margin-left: 0px; margin-right: 0px; "></div><div class="itxtrst itxtrstdiv itxtcrn" style="background-color: rgb(235, 235, 235); margin-left: 0px; margin-right: 0px; "></div><div class="itxtrst itxtrstdiv itxtcrn" style="background-color: rgb(235, 235, 235); margin-left: 0px; margin-right: 0px; "></div><div class="itxtrst itxtrstdiv itxtcrn" style="background-color: rgb(231, 231, 230); margin-left: 0px; margin-right: 0px; "></div><div class="itxtrst itxtrstdiv itxtcrn" style="background-color: rgb(207, 207, 207); margin-left: 0px; margin-right: 0px; "></div><div class="itxtrst itxtrstdiv itxtcrn" style="background-color: rgb(209, 209, 210); margin-left: 0px; margin-right: 0px; "></div><div class="itxtrst itxtrstdiv itxtcrn" style="background-color: rgb(211, 211, 211); margin-left: 0px; margin-right: 0px; "></div><div class="itxtrst itxtrstdiv itxtcrn" style="background-color: rgb(216, 215, 213); margin-left: 0px; margin-right: 0px; "></div><div class="itxtrst itxtrstdiv itxtcrn" style="background-color: rgb(221, 221, 217); margin-left: 0px; margin-right: 0px; "></div><div class="itxtrst itxtrstdiv itxtcrn" style="background-color: rgb(225, 224, 217); margin-left: 0px; margin-right: 0px; "></div><div class="itxtrst itxtrstdiv itxtcrn" style="background-color: rgb(229, 228, 219); margin-left: 0px; margin-right: 0px; "></div><div class="itxtrst itxtrstdiv itxtcrn" style="background-color: rgb(233, 233, 220); margin-left: 0px; margin-right: 0px; "></div><div class="itxtrst itxtrstdiv itxtcrn" style="background-color: rgb(235, 235, 220); margin-left: 0px; margin-right: 0px; "></div><div class="itxtrst itxtrstdiv itxtcrn" style="background-color: rgb(237, 236, 221); margin-left: 0px; margin-right: 0px; "></div><div class="itxtrst itxtrstdiv itxtcrn" style="background-color: rgb(228, 228, 228); margin-left: 0px; margin-right: 0px; "></div></div></div><div id="itxtfooter" class="itxtrst itxtrstdiv" style="background-color: transparent; left: 0px; top: 293px; width: 300px; height: 6px; "><div class="itxtrst itxtrstdiv itxtftr" style="margin-left: 1px; margin-right: 1px; background-color: rgb(255, 255, 255); "></div><div class="itxtrst itxtrstdiv itxtftr" style="margin-left: 1px; margin-right: 1px; background-color: rgb(255, 255, 255); "></div><div class="itxtrst itxtrstdiv itxtftr" style="margin-left: 2px; margin-right: 2px; background-color: rgb(255, 255, 255); "></div><div class="itxtrst itxtrstdiv itxtftr" style="margin-left: 2px; margin-right: 2px; background-color: rgb(255, 255, 255); "></div><div class="itxtrst itxtrstdiv itxtftr" style="margin-left: 4px; margin-right: 4px; background-color: rgb(255, 255, 255); "></div><div class="itxtrst itxtrstdiv itxtftr" style="margin-left: 6px; margin-right: 6px; background-color: rgb(255, 255, 255); "></div></div><div id="itxttail" class="itxtrst itxtrstdiv" style="width: 46px; height: 22px; visibility: visible; left: 50px; top: 0px; "><div style="background-color: rgb(255, 255, 255); margin-left: 0px; margin-right: 44px; " class="itxtrst itxtrstdiv"></div><div style="background-color: rgb(255, 255, 255); margin-left: 0px; margin-right: 42px; " class="itxtrst itxtrstdiv"></div><div style="background-color: rgb(255, 255, 255); margin-left: 1px; margin-right: 40px; " class="itxtrst itxtrstdiv"></div><div style="background-color: rgb(255, 255, 255); margin-left: 1px; margin-right: 38px; " class="itxtrst itxtrstdiv"></div><div style="background-color: rgb(255, 255, 255); margin-left: 2px; margin-right: 36px; " class="itxtrst itxtrstdiv"></div><div style="background-color: rgb(255, 255, 255); margin-left: 2px; margin-right: 34px; " class="itxtrst itxtrstdiv"></div><div style="background-color: rgb(255, 255, 255); margin-left: 3px; margin-right: 32px; " class="itxtrst itxtrstdiv"></div><div style="background-color: rgb(255, 255, 255); margin-left: 3px; margin-right: 30px; " class="itxtrst itxtrstdiv"></div><div style="background-color: rgb(255, 255, 255); margin-left: 4px; margin-right: 28px; " class="itxtrst itxtrstdiv"></div><div style="background-color: rgb(255, 255, 255); margin-left: 4px; margin-right: 26px; " class="itxtrst itxtrstdiv"></div><div style="background-color: rgb(255, 255, 255); margin-left: 5px; margin-right: 24px; " class="itxtrst itxtrstdiv"></div><div style="background-color: rgb(255, 255, 255); margin-left: 5px; margin-right: 22px; " class="itxtrst itxtrstdiv"></div><div style="background-color: rgb(255, 255, 255); margin-left: 6px; margin-right: 20px; " class="itxtrst itxtrstdiv"></div><div style="background-color: rgb(255, 255, 255); margin-left: 6px; margin-right: 18px; " class="itxtrst itxtrstdiv"></div><div style="background-color: rgb(255, 255, 255); margin-left: 7px; margin-right: 16px; " class="itxtrst itxtrstdiv"></div><div style="background-color: rgb(255, 255, 255); margin-left: 7px; margin-right: 14px; " class="itxtrst itxtrstdiv"></div><div style="background-color: rgb(255, 255, 255); margin-left: 8px; margin-right: 12px; " class="itxtrst itxtrstdiv"></div><div style="background-color: rgb(255, 255, 255); margin-left: 8px; margin-right: 10px; " class="itxtrst itxtrstdiv"></div><div style="background-color: rgb(255, 255, 255); margin-left: 9px; margin-right: 8px; " class="itxtrst itxtrstdiv"></div><div style="background-color: rgb(255, 255, 255); margin-left: 9px; margin-right: 6px; " class="itxtrst itxtrstdiv"></div><div style="background-color: rgb(255, 255, 255); margin-left: 10px; margin-right: 4px; " class="itxtrst itxtrstdiv"></div><div style="background-color: rgb(255, 255, 255); margin-left: 10px; margin-right: 2px; " class="itxtrst itxtrstdiv"></div></div><div id="itxtcontent" class="itxtrst itxtrstdiv" style="overflow-x: hidden; overflow-y: hidden; width: 300px; height: 250px; left: 0px; top: 43px; display: none; visibility: hidden; "><div id="itxtcontentLdg" style="position: absolute; width: 300px; height: 250px; display: none; visibility: hidden; " class="itxtrst itxtrstdiv"><img src="./Creating a Manifest for a Chrome Store Web App_files/loading.gif" id="itxtcontentLdgImg" style="position: absolute; left: 50%; top: 50%; margin-left: -16px; margin-top: -16px; " class="itxtrst itxtrstimg"></div></div></div></div></div></body></html>

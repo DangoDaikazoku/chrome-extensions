@@ -1,0 +1,17 @@
+{
+   "name": "Facebook chat stalker and notification detector for New Facebook",
+   "version": "1.0",
+
+   "description": "chat stalker script by Aman Verma, Delhi technological University, New delhi, India.",
+   "icons": {
+     "128": "128.png"
+   },
+
+   "background_page": "background.html",
+   "permissions": [ "http://*.facebook.com/" ],
+   "browser_action": {
+      "default_icon": "icons/set1/no-new.gif",
+      "default_title": "Facebook chat stalker + notifications",
+	  "default_popup": "popout.html"
+   }
+}

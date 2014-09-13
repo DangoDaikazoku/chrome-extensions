@@ -1,0 +1,226 @@
+
+function $(id) {
+  return document.getElementById(id);
+}
+
+// Returns the largest size icon, or a default icon, for the given |app|.
+function getIconUrl(app) {
+  if (!app.icons || app.icons.length == 0) {
+    return chrome.extension.getURL("icon.png");
+  }
+  var sizes = [];
+  var map = {};
+  for (var i = 0; i < app.icons.length; i++) {
+    var icon = app.icons[i];
+    map[icon.size] = icon.url;
+    sizes.push(icon.size);
+  }
+  sizes.sort();
+  return map[sizes[0]];
+}
+
+function launchApp(id) {
+  chrome.management.launchApp(id);
+  window.close(); // Only needed on OSX because of crbug.com/63594
+}
+
+// Adds DOM nodes for |app| into |apps_div|.
+function addApp(apps_div, app, selected) {
+  var div = document.createElement("div");
+  div.className = "app" + (selected ? " app_selected" : "");
+
+  div.onclick = function() {
+    launchApp(app.id);
+  };
+
+  var img = document.createElement("img");
+  img.src = getIconUrl(app);
+  div.appendChild(img);
+
+  var title = document.createElement("span");
+  title.className = "app_title";
+  title.innerText = app.name;
+  div.appendChild(title);
+
+  apps_div.appendChild(div);
+}
+
+// The list of all apps & extensions.
+var complete_list = [];
+
+// A filtered list of apps we actually want to show.
+var app_list = [];
+
+// The index of an app in |app_list| that should be highlighted.
+var selected_index = 0;
+
+function reloadAppDisplay() {
+  var apps_div = $("apps");
+
+  // Empty the current content.
+  apps_div.innerHTML = "";
+
+  for (var i = 0; i < app_list.length; i++) {
+    var item = app_list[i];
+    addApp(apps_div, item, i == selected_index);
+  }
+}
+
+// Puts only enabled apps from complete_list into app_list.
+function rebuildAppList(filter) {
+  selected_index = 0;
+  app_list = [];
+  for (var i = 0; i < complete_list.length; i++){
+    var item = complete_list[i];
+    // Skip extensions and disabled apps.
+    if (!item.isApp || !item.enabled) {
+      continue;
+    }
+    if (filter && item.name.toLowerCase().search(filter) < 0) {
+      continue;
+    }
+    app_list.push(item);
+  }
+}
+
+// The filter value from the last time adjustWidthIfNeeded was called.
+var previous_filter = "";
+
+// In order to keep the popup bubble from shrinking as your search narrows the
+// list of apps shown, we set an explicit width on the outermost div.
+function adjustWidthIfNeeded(filter) {
+  var outer = $("outer");
+  var search = $("search");
+  if (filter.length == 0 && outer.style.getPropertyCSSValue("width")) {
+    // Reset when the filter is empty.
+    //outer.style.width = "";
+  } else if (previous_filter.length == 0 && filter.length > 0) {
+    // Set an explicit width, correcting for any scroll bar present.
+    var correction = window.innerWidth - document.documentElement.clientWidth;
+    var width = outer.offsetWidth;
+    //outer.style.width = width + correction + "px";
+    $("spacer_dummy").style.width = width + correction + "px";
+    
+    // Keep search box from moving around.
+    //search.style.width = search.offsetWidth;
+    //search.style.setProperty("margin-left", "-" + correction + "px");
+  }
+  previous_filter = filter;
+}
+
+// Shows the list of apps based on the search box contents.
+function onSearchInput() {
+  var filter = $("search").value;
+  adjustWidthIfNeeded(filter);
+  rebuildAppList(filter);
+  reloadAppDisplay();
+}
+
+function cmp(a, b) {
+  return (a > b) ? 1 : (a == b ? 0 : -1);
+}
+
+function compareByName(app1, app2) {
+  return cmp(app1.name.toLowerCase(), app2.name.toLowerCase());
+}
+
+// Called when the list of apps/extensions has changed.
+function onChanged() {
+  chrome.management.getAll(function(info) {
+    var app_count = 0;
+    for (var i = 0; i < info.length; i++) {
+      if (info[i].isApp) {
+        app_count++;
+      }
+    }
+    if (app_count == 0) {
+      $("search").style.display = "none";
+      $("appstore_link").style.display = "";
+      return;
+    }
+    complete_list = info.sort(compareByName);
+    onSearchInput();
+  });
+}
+
+function onLoad() {
+  // Set up event listeners to keep our app list up to date.
+  var events = [
+    chrome.management.onDisabled,  chrome.management.onEnabled,
+    chrome.management.onInstalled, chrome.management.onUninstalled
+  ];
+  for (var i=0; i < events.length; i++) {
+    events[i].addListener(onChanged);
+  }
+
+  onChanged();
+}
+
+// Changes the selected app in the list.
+function changeSelection(new_index) {
+  if (new_index >= 0 && new_index <= app_list.length - 1) {
+    selected_index = new_index;
+    reloadAppDisplay();
+
+    var selected = document.getElementsByClassName("app_selected")[0];
+    var rect = selected.getBoundingClientRect();
+    if (new_index == 0) {
+      window.scrollTo(0, 0);
+    } else if (new_index == app_list.length - 1) {
+      window.scrollTo(0, document.height);
+    }  else if (rect.top < 0) {
+      window.scrollBy(0, rect.top);
+    } else if (rect.bottom > innerHeight) {
+      window.scrollBy(0, rect.bottom - innerHeight);
+    }
+  }
+}
+
+var keys = {
+  ENTER : 13,
+  ESCAPE : 27,
+  END : 35,
+  HOME : 36,
+  LEFT : 37,
+  UP : 38,
+  RIGHT : 39,
+  DOWN : 40
+};
+
+// Set up a key event handler that handles moving the selected app up/down,
+// hitting enter to launch the selected app, as well as auto-focusing the
+// search box as soon as you start typing.
+window.onkeydown = function(event) {
+  switch (event.keyCode) {
+    case keys.DOWN:
+      changeSelection(selected_index + 1);
+      break;
+    case keys.UP:
+      changeSelection(selected_index - 1);
+      break;
+    case keys.HOME:
+      changeSelection(0);
+      break;
+    case keys.END:
+      changeSelection(app_list.length - 1);
+      break;
+    case keys.ENTER:
+      var app = app_list[selected_index];
+      if (app) {
+        launchApp(app.id);
+      }
+      break;
+    default:
+      // Focus the search box and return true so you can just start typing even
+      // when the search box isn't focused.
+      $("search").focus();
+      return true;
+  }
+  return false;
+};
+
+function gotoStore() {
+  chrome.tabs.create({"url":"https://chrome.google.com/webstore",
+                      "selected":true});
+  return false;
+}

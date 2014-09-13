@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>image scroller</title>
+<script type="text/javascript" src="jquery-1.5.1.min.js"></script>
+<script type="text/javascript">
+
+var posx=0,posy=0;
+var lft=-510,lft2=1490;
+function positionq(e){
+
+if (e.pageX || e.pageY){
+		posx = e.pageX;
+		posy = e.pageY;
+	}
+else if (e.clientX || e.clientY){
+		posx = e.clientX + document.body.scrollLeft
+			+ document.documentElement.scrollLeft;
+		posy = e.clientY + document.body.scrollTop
+			+ document.documentElement.scrollTop;
+	}
+
+
+}
+
+function slide(){
+	
+	if(lft<-2000)
+	{
+		lft=lft2+2000;
+		$("#container").css("left",lft);
+		}
+	else if(lft2<-2000)
+	{
+		lft2=lft+2000;
+		$("#container2").css("left",lft2);
+		}
+	else if(lft2>2000)
+	{
+		lft2=lft-2000;
+		$("#container2").css("left",lft2);
+		}
+	else if(lft>2000)
+	{
+		lft=lft2-2000;
+		$("#container").css("left",lft);
+		}
+	
+if(posx<650&&(posy>100&&posy<500))
+	{
+		
+		{
+			lft+=5;
+			lft2+=5;
+			$("#container").css("left",lft);
+			$("#container2").css("left",lft2);
+		}
+	}
+else if(posx>650&&(posy>100&&posy<500))
+	{
+		
+		{
+			lft-=5;
+			lft2-=5;
+			$("#container").css("left",lft);
+			$("#container2").css("left",lft2);
+		}
+	}
+	
+setTimeout('slide()', 10);
+}
+
+</script>
+</head>
+
+<body onLoad="slide()" >
+<div id="main" style="position:absolute; width:1347px; height:400px; left: 10px; top:100px; overflow:hidden;" onmousemove="positionq(event)">
+
+<div id="container" style="position:absolute; width:2000px; height:400px; left: -510px; overflow:hidden; z-index:2"  >
+ <img src="images/w120071920x1200cq2.jpg" style="position:absolute; left:0px; width:700px;">
+<img src="images/wallpaper_modern_warfare_2_03_1920x1200.jpg" border="0" usemap="#Map" style="position:absolute;left:700px;  width:700px;">
+<map name="Map">
+  <area id="head" shape="circle" coords="466,45,29" href="mapping.html" >
+</map>
+<img src="images/wallpaper_isaac_1920x1200_download_090508.jpg" style="position:absolute; left:1400px; width:600px; height: 400px;">
+</div>
+
+<div id="container2" style="position:absolute; width:2000px; height:400px; left: 1490px; overflow:hidden; z-index:2"  >
+ <img src="images/w120071920x1200cq2.jpg" style="position:absolute; left:0px; width:700px;">
+<img src="images/wallpaper_modern_warfare_2_03_1920x1200.jpg" border="0" usemap="#Map2" style="position:absolute;left:700px;  width:700px;">
+<map name="Map2">
+  <area id="head" shape="circle" coords="466,45,29" href="mapping.html" >
+</map>
+<img src="images/wallpaper_isaac_1920x1200_download_090508.jpg" style="position:absolute; left:1400px; width:600px; height: 400px;">
+</div>
+
+
+</div>
+
+
+
+
+<div id="position" style="position:absolute; width:549px; height:40px; left: 376px; top:518px; overflow:hidden; border-style:dotted; text-align: center;">
+lorem ipsum dolor amiti
+</div>
+
+</body>
+</html>

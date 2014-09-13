@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)http://dean.edwards.name/weblog/2005/03/ungreased/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <title>Dean Edwards: How To Disable GreaseMonkey On Your Web Site</title>
+ <meta name="author" content="Dean Edwards"><!-- Keeping code tidy! :) -->
+ <link rel="stylesheet" href="http://deanedwardsoffline.appspot.com/css/style.css" media="all">
+ <link rel="icon" href="http://dean.edwards.name/favicon.ico" type="image/x-icon">
+ <script src="./Dean Edwards  How To Disable GreaseMonkey On Your Web Site_files/my.js"></script>
+ <!--[if lt IE 9]><script>"abbr,article,footer,header,nav,section,time".replace(/\w+/g,function(t){document.createElement(t)})</script><![endif]-->
+ <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/deanedwards/weblog">
+ <link rel="pingback" href="http://dean.edwards.name/weblog/xmlrpc.php">
+</head>
+
+<body id="weblog-single">
+<header>
+ <h1 class="home"><a href="http://dean.edwards.name/">dean.edwards.name</a>/<a href="http://dean.edwards.name/weblog/">weblog</a>/<a href="http://dean.edwards.name/weblog/2005/">2005</a>/<a href="http://dean.edwards.name/weblog/2005/03/">03</a>/ungreased/</h1>
+ <nav>
+  <ul><!--
+--><li><a href="http://dean.edwards.name/my/">my</a></li><!--
+--><li><a href="http://dean.edwards.name/weblog/">weblog</a></li><!--
+--><li><a href="http://dean.edwards.name/about/">about</a></li><!--
+--><li><a href="http://dean.edwards.name/contact/">contact</a></li><!--
+--><li class="last-child"><a href="http://dean.edwards.name/search/">search</a></li><!--
+--></ul>
+ </nav>
+</header>
+
+<nav id="prev-next">
+ <ul>
+  <li class="prev" title="Previous post"><span>Previous post: </span><a href="http://dean.edwards.name/weblog/2005/03/ie-emulator/">IE Emulator for GreaseMonkey</a></li>  
+  <li class="next" title="Next post"><span>Next post: </span><a href="http://dean.edwards.name/weblog/2005/03/dhtml-art/">DHTML Art</a></li>  
+ </ul>
+</nav>
+
+<article>
+<header>
+ <h2>How To Disable GreaseMonkey On Your Web Site</h2>
+</header>
+<p>Sorry <a href="http://youngpup.net/">Aaron</a>. I like <a href="http://greasemonkey.mozdev.org/">GreaseMonkey</a>. I really do. Let me explain.</p>
+<p>You see, <em>GreaseMonkey broke my site</em>. I didn’t realise what the problem was at first. I use a JavaScript syntax highlighter to make code on this site look slightly less boring. It uses some regular expressions and a little bit of <abbr title="Document Object Model">DOM</abbr> scripting. After installing GreaseMonkey I noticed that some of my code samples were completely broken in Firefox.</p>
+<p>The trouble was, that one of the default GreaseMonkey user scripts (<cite>linkify</cite>) was altering the DOM before my script got there. The <abbr>DOM</abbr> my script was expecting to see wasn’t the DOM it got. <em>GreaseMonkey can break <abbr>DOM</abbr> scripting</em>. </p>
+<p>This is a problem we are going to see more of (<a href="http://my.opera.com/hallvors/journal/44">User scripts come to Opera</a> as of version 8.0 beta 3). The solution to this is to use defensive scripting. Script authors will now have to account for the fact that someone else may be messing with their <abbr>DOM</abbr>. Code accordingly.</p>
+<p>There are extreme cases of course. Cases where you just don’t want your <abbr>DOM</abbr> screwed with. What you really want to do is disable GreaseMonkey. Turn the bloody thing off.</p>
+<p>Here you go:</p>
+<pre class="js javascript highlight"> <span class="global">document</span>._createElement = <span class="global">document</span>.createElement;
+<span class="global">document</span>.createElement = <span class="keyword">function</span>(tagName, password) {
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (tagName != <span class="string">"SCRIPT"</span> || password == <span class="string">"My scripts are OK!"</span>) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="global">document</span>._createElement(tagName);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+};</pre>
+<p>Insert that little script in your page and GreaseMonkey is no more. The downside is of course, advertisers can do this too…</p>
+<footer>
+ <ul class="meta">
+  <li>Posted: <time datetime="2005-03-23T18:00:30+00:00">2005/03/23 6:00 pm</time></li>
+  <li>Filed under: <a href="http://dean.edwards.name/weblog/category/javascript/" title="View all posts in JavaScript" rel="category tag">JavaScript</a></li>
+  <li>Links:
+   <a href="./Dean Edwards  How To Disable GreaseMonkey On Your Web Site_files/Dean Edwards  How To Disable GreaseMonkey On Your Web Site.htm" title="Permanent link to this post">permalink</a></li>
+ </ul>
+</footer>
+</article>
+
+<section id="comments">
+<h3>Comments (53)</h3>
+<p><a href="http://dean.edwards.name/weblog/2005/03/ungreased/#postcomment">Leave a comment</a></p>
+
+<article id="comment1436">
+<p class="permalink">
+<a href="http://dean.edwards.name/weblog/2005/03/ungreased/#comment1436" rel="bookmark" title="Permanent link to this comment">
+<span>Comment: #</span>1</a>
+</p>
+<p>While this is a way out for Greasemonkey, you’ll have no way out with Opera, as Opera has every option of rewriting your script before it executes, using the BeforeScript and BeforeExternalScript events.
+</p>
+<footer>
+<ul class="meta">
+ <li class="author">Comment by: <cite><a href="http://virtuelvis.com/" rel="external" class="url">Arve</a></cite></li>
+ <li>Posted: <time datetime="2005-03-23T21:28:13+00:00">2005/03/23 9:28 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1437">
+<p class="permalink">
+<a href="http://dean.edwards.name/weblog/2005/03/ungreased/#comment1437" rel="bookmark" title="Permanent link to this comment">
+<span>Comment: #</span>2</a>
+</p>
+<p>This is a heads-up to the browser developers I guess. Leave a back-door please! We won’t always use it but it’s nice to know it’s there…</p>
+<footer>
+<ul class="meta">
+ <li class="author">Comment by: <cite><a href="http://dean.edwards.name/" rel="external" class="url">-dean</a></cite></li>
+ <li>Posted: <time datetime="2005-03-24T00:23:27+00:00">2005/03/24 12:23 am</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1438">
+<p class="permalink">
+<a href="http://dean.edwards.name/weblog/2005/03/ungreased/#comment1438" rel="bookmark" title="Permanent link to this comment">
+<span>Comment: #</span>3</a>
+</p>
+<p>Why is it that some people don’t realise that what a user does to content they download is their own business?</p>
+<p>Just add a little warning saying “if this looks bad, try turning user scripts off” and be done with it.</p>
+<footer>
+<ul class="meta">
+ <li class="author">Comment by: <cite><a href="http://holizz.com/" rel="external" class="url">Tom</a></cite></li>
+ <li>Posted: <time datetime="2005-03-24T04:12:59+00:00">2005/03/24 4:12 am</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1439">
+<p class="permalink">
+<a href="http://dean.edwards.name/weblog/2005/03/ungreased/#comment1439" rel="bookmark" title="Permanent link to this comment">
+<span>Comment: #</span>4</a>
+</p>
+<p>So, Opera’s giving me yet another reason to pay it only the mildest of attention while I’m developing, then?
+</p>
+<footer>
+<ul class="meta">
+ <li class="author">Comment by: <cite><a href="http://yuda.org/" rel="external" class="url">John Y.</a></cite></li>
+ <li>Posted: <time datetime="2005-03-24T06:44:42+00:00">2005/03/24 6:44 am</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1441">
+<p class="permalink">
+<a href="http://dean.edwards.name/weblog/2005/03/ungreased/#comment1441" rel="bookmark" title="Permanent link to this comment">
+<span>Comment: #</span>5</a>
+</p>
+<p>I think the larger issue here is scripts that are turning DOM compliant browsers into non-compliant ones.</p>
+<p>I’d like to see less of the “Emulate IE” in other browsers, and more “Emulate true standards” in IE.
+</p>
+<footer>
+<ul class="meta">
+ <li class="author">Comment by: <cite>Patrick.Denny</cite></li>
+ <li>Posted: <time datetime="2005-03-24T14:12:05+00:00">2005/03/24 2:12 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1443">
+<p class="permalink">
+<a href="http://dean.edwards.name/weblog/2005/03/ungreased/#comment1443" rel="bookmark" title="Permanent link to this comment">
+<span>Comment: #</span>6</a>
+</p>
+<p>Er, John. No.  You are however encouraged to develop with standards, trust that you do the right thing, and not care particularily whether a user script will conflict with your sites/pages/application: Users have chosen to add these scripts themselves, and they should be able to turn them off entirely by themselves as well. Besides, apart from site fixes, this is a feature that will only ever be used by a tiny minority of the users, just like only a tiny percentage of users create user stylesheets.
+</p>
+<footer>
+<ul class="meta">
+ <li class="author">Comment by: <cite><a href="http://virtuelvis.com/" rel="external" class="url">Arve</a></cite></li>
+ <li>Posted: <time datetime="2005-03-24T19:38:16+00:00">2005/03/24 7:38 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1444">
+<p class="permalink">
+<a href="http://dean.edwards.name/weblog/2005/03/ungreased/#comment1444" rel="bookmark" title="Permanent link to this comment">
+<span>Comment: #</span>7</a>
+</p>
+<p>“Cases where you just don’t want your DOM screwed with.” -quote</p>
+<p>“Your DOM”?  I am sorry, but once your code leaves your server, it is no longer “your DOM” but the “user’s DOM” and they can screw with it as they please.</p>
+<p>Deal with all possibilities, but don’t *limit* a user’s palette of abilities.  I thought we all went through this already with things like disabling right click and target=”_blank” ?
+</p>
+<footer>
+<ul class="meta">
+ <li class="author">Comment by: <cite><a href="http://www.greywyvern.com/" rel="external" class="url">GreyWyvern</a></cite></li>
+ <li>Posted: <time datetime="2005-03-24T20:38:34+00:00">2005/03/24 8:38 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1445">
+<p class="permalink">
+<a href="http://dean.edwards.name/weblog/2005/03/ungreased/#comment1445" rel="bookmark" title="Permanent link to this comment">
+<span>Comment: #</span>8</a>
+</p>
+<blockquote>
+<p>“Your DOM”? I am sorry, but once your code leaves your server, it is no longer “your DOM” but the “user’s DOM” and they can screw with it as they please.</p>
+<address><a href="http://dean.edwards.name/weblog/2005/03/ungreased/#comment1444">Comment by GreyWyvern</a></address>
+</blockquote>
+<p>Maybe you’re right. I haven’t disabled GreaseMonkey on this site. I coded around the <cite>linkify</cite> changes instead. But there is an issue here I feel. It looks like we are entering an era of scripting and web applications. It might mean that those applications might have to be coded a lot more defensively or at least carry a warning about user scripting.</p>
+<footer>
+<ul class="meta">
+ <li class="author">Comment by: <cite><a href="http://dean.edwards.name/" rel="external" class="url">-dean</a></cite></li>
+ <li>Posted: <time datetime="2005-03-24T21:03:18+00:00">2005/03/24 9:03 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1446">
+<p class="permalink">
+<a href="http://dean.edwards.name/weblog/2005/03/ungreased/#comment1446" rel="bookmark" title="Permanent link to this comment">
+<span>Comment: #</span>9</a>
+</p>
+<p>There are two groups who needs “warnings”:</p>
+<p>First, it’s site authors: They need to code with accessible, rich, semantic markup. Meaning: minimize the need for user scripting to route around real problems.</p>
+<p>But, it’s also for user script authors: They will need to be defensive about their scripting: Don’t mess with documents that have already done what your user script does.
+</p>
+<footer>
+<ul class="meta">
+ <li class="author">Comment by: <cite><a href="http://virtuelvis.com/" rel="external" class="url">Arve</a></cite></li>
+ <li>Posted: <time datetime="2005-03-24T21:19:11+00:00">2005/03/24 9:19 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1447">
+<p class="permalink">
+<a href="http://dean.edwards.name/weblog/2005/03/ungreased/#comment1447" rel="bookmark" title="Permanent link to this comment">
+<span>Comment: #</span>10</a>
+</p>
+<p>In light of the above comments. I provide this as an alternative way of disabling GreaseMonkey:</p>
+<pre class="js javascript highlight"> <span class="global">document</span>._createElement = <span class="global">document</span>.createElement;
+<span class="global">document</span>.createElement = <span class="keyword">function</span>(tagName, password) {
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (tagName == <span class="string">"SCRIPT"</span> &amp;&amp; password != <span class="string">"My scripts are OK!"</span>) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (!<span class="special">confirm</span>(<span class="string">"Some GreaseMonkey user scripts can adversely affect the display of this page.\n"</span> +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Do you want to allow user scripts on this page?"</span>)) <span class="keyword">return</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="global">document</span>._createElement(tagName);
+};
+</pre>
+<footer>
+<ul class="meta">
+ <li class="author">Comment by: <cite><a href="http://dean.edwards.name/" rel="external" class="url">-dean</a></cite></li>
+ <li>Posted: <time datetime="2005-03-24T21:24:31+00:00">2005/03/24 9:24 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1448" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>11</p>
+<p><strong>Grease-blockers</strong>
+
+Grease-blockers: Dean Edwards twists the “blocker” theme upside-down with his article “How To Disable GreaseMonkey On Your Web Site”. (For Greasemonkey background, see CNET.) Usually site visitors block things they don’t like from site creators, l…</p>
+<footer>
+<ul class="meta">
+ <li class="author">Trackback by: <cite><a href="http://www.markme.com/jd/archives/007331.cfm" rel="external" class="url">JD on MX</a></cite></li>
+ <li>Posted: <time datetime="2005-03-24T22:21:43+00:00">2005/03/24 10:21 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1449">
+<p class="permalink">
+<a href="http://dean.edwards.name/weblog/2005/03/ungreased/#comment1449" rel="bookmark" title="Permanent link to this comment">
+<span>Comment: #</span>12</a>
+</p>
+<p>Next thing you know, they’re going to give the user the option to disable javaScript all together and then we’ll all be screwed.
+</p>
+<footer>
+<ul class="meta">
+ <li class="author">Comment by: <cite><a href="http://gilluminate.com/" rel="external" class="url">Gill</a></cite></li>
+ <li>Posted: <time datetime="2005-03-24T22:51:38+00:00">2005/03/24 10:51 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1450" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>13</p>
+<p>[...] ing on your right as a web developer, have no fear, Dean Edwards has come up with a way to disable it. You can even join the huge debate on his comments section.  	 					 				 					 			 [...]</p>
+<footer>
+<ul class="meta">
+ <li class="author">Pingback by: <cite><a href="http://blog.ericgoodwin.com/?p=50" rel="external" class="url">eg.  » Blog Archive   » Disabling Grease Monkey</a></cite></li>
+ <li>Posted: <time datetime="2005-03-25T00:15:37+00:00">2005/03/25 12:15 am</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1451">
+<p class="permalink">
+<a href="http://dean.edwards.name/weblog/2005/03/ungreased/#comment1451" rel="bookmark" title="Permanent link to this comment">
+<span>Comment: #</span>14</a>
+</p>
+<p>A confirm box? You’re lucky if somebody like me has JavaScript turned on when they visit your site, it won’t be on much longer if you throw confirm boxes in their faces.
+</p>
+<footer>
+<ul class="meta">
+ <li class="author">Comment by: <cite><a href="http://holizz.com/" rel="external" class="url">Tom</a></cite></li>
+ <li>Posted: <time datetime="2005-03-25T02:15:57+00:00">2005/03/25 2:15 am</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1457">
+<p class="permalink">
+<a href="http://dean.edwards.name/weblog/2005/03/ungreased/#comment1457" rel="bookmark" title="Permanent link to this comment">
+<span>Comment: #</span>15</a>
+</p>
+<blockquote>
+<p>You’re lucky if somebody like me has JavaScript turned on when they visit your site…</p>
+</blockquote>
+<p>Isn’t that a little bit like visiting <a href="http://www.csszengarden.com/">csszengarden</a> with <abbr>CSS</abbr> turned off? All of my work is JavaScript or JavaScript related.</p>
+<footer>
+<ul class="meta">
+ <li class="author">Comment by: <cite><a href="http://dean.edwards.name/" rel="external" class="url">-dean</a></cite></li>
+ <li>Posted: <time datetime="2005-03-25T03:38:08+00:00">2005/03/25 3:38 am</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1460" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>16</p>
+<p><strong>Today’s Jots posts</strong>
+
+
+
+
+How To Disable GreaseMonkey On Your Web Site
+
+Tags: greasemonkey</p>
+<footer>
+<ul class="meta">
+ <li class="author">Trackback by: <cite><a href="http://joe.blogware.com/blog/_archives/2005/3/26/479613.html" rel="external" class="url">Joe's Space</a></cite></li>
+ <li>Posted: <time datetime="2005-03-26T02:01:13+00:00">2005/03/26 2:01 am</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1473">
+<p class="permalink">
+<a href="http://dean.edwards.name/weblog/2005/03/ungreased/#comment1473" rel="bookmark" title="Permanent link to this comment">
+<span>Comment: #</span>17</a>
+</p>
+<p>‘The trouble was, that one of the default GreaseMonkey user scripts (linkify) was altering the DOM before my script got there. The DOM my script was expecting to see wasn’t the DOM it got. GreaseMonkey can break DOM scripting’</p>
+<p>okay. In what way was the Dom changed?
+</p>
+<footer>
+<ul class="meta">
+ <li class="author">Comment by: <cite>bryan</cite></li>
+ <li>Posted: <time datetime="2005-03-27T16:01:13+00:00">2005/03/27 4:01 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1474">
+<p class="permalink">
+<a href="http://dean.edwards.name/weblog/2005/03/ungreased/#comment1474" rel="bookmark" title="Permanent link to this comment">
+<span>Comment: #</span>18</a>
+</p>
+<p><cite>linkify</cite> identifies text that looks like a link and wraps it with an <code>&lt;a&gt;</code> tag.</p>
+<footer>
+<ul class="meta">
+ <li class="author">Comment by: <cite><a href="http://dean.edwards.name/" rel="external" class="url">-dean</a></cite></li>
+ <li>Posted: <time datetime="2005-03-27T16:07:08+00:00">2005/03/27 4:07 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1475">
+<p class="permalink">
+<a href="http://dean.edwards.name/weblog/2005/03/ungreased/#comment1475" rel="bookmark" title="Permanent link to this comment">
+<span>Comment: #</span>19</a>
+</p>
+<p>Heh, extensions don’t need to create an element to edit your page, so I’ll bet GM just comes out with a way to disable your disabler. =D</p>
+<p>All it has to do is point document.createElement back to document._createElement.</p>
+<p>I really don’t think you should be putting this disabler out there though. It’s not GM’s fault that somebody wrote a bad script. If you want to write something helpful you should create one that blocks certain grease monkey scripts, instead of all of them.
+</p>
+<footer>
+<ul class="meta">
+ <li class="author">Comment by: <cite><a href="http://www.shellcity.net/phpBB" rel="external" class="url">Gerry</a></cite></li>
+ <li>Posted: <time datetime="2005-03-27T22:21:23+00:00">2005/03/27 10:21 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1477">
+<p class="permalink">
+<a href="http://dean.edwards.name/weblog/2005/03/ungreased/#comment1477" rel="bookmark" title="Permanent link to this comment">
+<span>Comment: #</span>20</a>
+</p>
+<p>LOL, the only people using “features” like this are people like us (well, not me) – that is, web developers. It’s like worrying about errant conditional comments for folks with standalone IE browsers installed. It’s just not an issue in the real world. It’s only an issue in the closed gene pool of web developers <img src="./Dean Edwards  How To Disable GreaseMonkey On Your Web Site_files/icon_smile.gif" alt=":-)" class="wp-smiley"> 
+</p>
+<footer>
+<ul class="meta">
+ <li class="author">Comment by: <cite><a href="http://www.projectseven.com/" rel="external" class="url">Al Sparber</a></cite></li>
+ <li>Posted: <time datetime="2005-03-28T00:00:54+00:00">2005/03/28 12:00 am</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1478">
+<p class="permalink">
+<a href="http://dean.edwards.name/weblog/2005/03/ungreased/#comment1478" rel="bookmark" title="Permanent link to this comment">
+<span>Comment: #</span>21</a>
+</p>
+<p>Sort of, Al.  We’ve got a lot of scripts, and there’s been a good bit of buzz.</p>
+<p>If there is a user script that does something useful, Aunt Tilly will install it, even if it means asking her geeky nephew to help her out.  As an example, several non-techie friends who are using Firefox have asked me to help them out with features like SessionSaver and AdBlocker.  Extensions are gaining some mindshare, and I bet user scripts do to.</p>
+<p>Thanks for starting this conversation on a reasonable note, Dean.  I posted a pointer over on <a href="http://greaseblog.blogspot.com/2005/03/user-script-arms-race-has-begun.html">greaseblog</a>.
+</p>
+<footer>
+<ul class="meta">
+ <li class="author">Comment by: <cite><a href="http://greaseblog.blogspot.com/" rel="external" class="url">Jeremy Dunck</a></cite></li>
+ <li>Posted: <time datetime="2005-03-28T03:26:13+00:00">2005/03/28 3:26 am</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1479">
+<p class="permalink">
+<a href="http://dean.edwards.name/weblog/2005/03/ungreased/#comment1479" rel="bookmark" title="Permanent link to this comment">
+<span>Comment: #</span>22</a>
+</p>
+<p>It is, literally, impossible to “disable” Greasemonkey. (by a site owner using Javascript installed on their site) You can mess with its ability to perform certain actions, but then those can always be worked around, which you can then work around, which can then be worked around……. Talk about a barrel full of monkeys. It’s pretty funny that people are freaking out about Gm scripts “messing with their site”. Especially when we didn’t hear that about Firefox extensions and/or Javascript Bookmarklets. (afaik) I find this all very odd, as well as humorous, and interesting while I’m at it. As a web site developer, designer, programmer, implementer, and so on, I could care less what people (legally) do with “my (published) content” once it arrives on their client. And, in fact, I don’t really want to know. Talk about a fascinating exercise in human sociology and psychology engineering and observation. And then one day “this” will all blow over and people will roll their eyes in a smiling manner whenever someone thinks to mention it. Until then, sit back and enjoy the show. Until “next time”.
+</p>
+<footer>
+<ul class="meta">
+ <li class="author">Comment by: <cite><a href="http://www.snowcrest.net/donnelly/gmscripts/" rel="external" class="url">Bill Donnelly</a></cite></li>
+ <li>Posted: <time datetime="2005-03-28T08:43:12+00:00">2005/03/28 8:43 am</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1480">
+<p class="permalink">
+<a href="http://dean.edwards.name/weblog/2005/03/ungreased/#comment1480" rel="bookmark" title="Permanent link to this comment">
+<span>Comment: #</span>23</a>
+</p>
+<p>Bill-</p>
+<p>You’re absolutely correct. The Serenity Prayer (or a secular counterpart) should be required for all web developers.
+</p>
+<footer>
+<ul class="meta">
+ <li class="author">Comment by: <cite><a href="http://www.projectseven.com/" rel="external" class="url">Al Sparber</a></cite></li>
+ <li>Posted: <time datetime="2005-03-28T15:55:46+00:00">2005/03/28 3:55 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1485">
+<p class="permalink">
+<a href="http://dean.edwards.name/weblog/2005/03/ungreased/#comment1485" rel="bookmark" title="Permanent link to this comment">
+<span>Comment: #</span>24</a>
+</p>
+<p>Heh, well this disabler isn’t going to work for long. About two posts after the one where I listed this disabler on the Grease monkey mailing list one of the developers posted this:</p>
+<p>“I found (well, someone at work found) a way for us to inject even
+earlier — into the actual source code before the browser gets it.
+That will be next change and should fix this DOMContentLoaded stuff.”
+</p>
+<p>BTW, this posting script really needs to be updated so that people can add + modifiers to their email addresses.</p>
+<footer>
+<ul class="meta">
+ <li class="author">Comment by: <cite><a href="http://www.shellcity.net/phpBB" rel="external" class="url">Gerry</a></cite></li>
+ <li>Posted: <time datetime="2005-03-28T18:00:46+00:00">2005/03/28 6:00 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1492">
+<p class="permalink">
+<a href="http://dean.edwards.name/weblog/2005/03/ungreased/#comment1492" rel="bookmark" title="Permanent link to this comment">
+<span>Comment: #</span>25</a>
+</p>
+<p>Keep in mind that people aren’t so much freaking out in a “OMG they are messing with my content!”, they’re getting concerned that user-scripting will cause the site not to function correctly.  If user-scripting becomes popular, then you’ll have a potentially significant number of people visit your site, find it doesn’t work correctly and assume it’s the developer’s fault.</p>
+<p>There’s only so much a site developer can do in terms of defensive scripting, client-side extensions/scripting can do all sorts to the page and trying to account for all possibilities is akin to trying to solve the halting problem.  Whilst I’m firmly in the “give the user control” camp, there’s got to be some give and take.
+</p>
+<footer>
+<ul class="meta">
+ <li class="author">Comment by: <cite><a href="http://www.winsper.org.uk/" rel="external" class="url">Darren Winsper</a></cite></li>
+ <li>Posted: <time datetime="2005-03-30T11:27:20+00:00">2005/03/30 11:27 am</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1493">
+<p class="permalink">
+<a href="http://dean.edwards.name/weblog/2005/03/ungreased/#comment1493" rel="bookmark" title="Permanent link to this comment">
+<span>Comment: #</span>26</a>
+</p>
+<p>in this case, i’d say the onus is on the user. if they install greasemonkey and then experience problems on a site, it’s their problem (and, in a broader sense, greasemonkey’s developers’ responsibility to fix it). however, i know that’s a very idealistic view on the subject, which doesn’t solve the immediate problem of users coming across what they think is a “broken” site (then again, considering that greasemonkey is not an extension that joe average would install, maybe it’s not such a huge problem…not sure).
+</p>
+<footer>
+<ul class="meta">
+ <li class="author">Comment by: <cite><a href="http://www.splintered.co.uk/" rel="external" class="url">patrick h. lauke</a></cite></li>
+ <li>Posted: <time datetime="2005-03-30T15:07:39+00:00">2005/03/30 3:07 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1494">
+<p class="permalink">
+<a href="http://dean.edwards.name/weblog/2005/03/ungreased/#comment1494" rel="bookmark" title="Permanent link to this comment">
+<span>Comment: #</span>27</a>
+</p>
+<p>OK. I’m closing comments on this one.</p>
+<p>User scripts are the shape of things to come. Let’s continue this debate somewhere suitable:</p>
+<p><a href="http://greaseblog.blogspot.com/2005/03/user-script-arms-race-has-begun.html">http://greaseblog.blogspot.com/2005/03/user-script-arms-race-has-begun.html</a>
+
+</p>
+<footer>
+<ul class="meta">
+ <li class="author">Comment by: <cite><a href="http://dean.edwards.name/" rel="external" class="url">-dean</a></cite></li>
+ <li>Posted: <time datetime="2005-03-31T00:24:31+00:00">2005/03/31 12:24 am</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1593" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>28</p>
+<p>[...] utilizado para desactivar la publicidad de los sitios web. Es por esto que Dean Edwards ha publicado una forma sencilla de impedir su ejecución con un simple JavaScript que podeis ver  [...]</p>
+<footer>
+<ul class="meta">
+ <li class="author">Pingback by: <cite><a href="http://zootropo.f2o.org/archivos/2005/04/02/muere-greasemonkey-muere/" rel="external" class="url">Zootropo   » Muere Greasemonkey, muere</a></cite></li>
+ <li>Posted: <time datetime="2005-04-02T17:33:20+00:00">2005/04/02 5:33 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1709" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>29</p>
+<p><strong>Greasemonkey escalation</strong>
+
+Greasemonkey escalation: Lots of activity around this Firefox extension, which can accept specific scripts, to make specific modifications to specific sites. A parallel for IE/Win has been created, then abandoned, but may spring up again. There is at l…</p>
+<footer>
+<ul class="meta">
+ <li class="author">Trackback by: <cite><a href="http://www.markme.com/jd/archives/007477.cfm" rel="external" class="url">JD on MX</a></cite></li>
+ <li>Posted: <time datetime="2005-04-13T19:15:54+00:00">2005/04/13 7:15 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1720" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>30</p>
+<p><strong>Heard Here First</strong>
+
+As predicted: The user script arms race has begun!
+
+BTW: Am I stupid? Does the Greasemonkey blog have no RSS feed? No trackbacks? Someone set me straight here, please. I wanna subscribe.
+
+Update: Yep, I’m stupid. Thanks, Stephen, for confirming th…</p>
+<footer>
+<ul class="meta">
+ <li class="author">Trackback by: <cite><a href="http://www.allpeers.com/blog/?p=102" rel="external" class="url">Peer Pressure</a></cite></li>
+ <li>Posted: <time datetime="2005-04-14T17:37:12+00:00">2005/04/14 5:37 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1772" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>31</p>
+<p>[...]  med script för att hindra ens besökare från att använda Greasemonkey dök upp. Men om man t&amp; [...]</p>
+<footer>
+<ul class="meta">
+ <li class="author">Pingback by: <cite><a href="http://www.jacobrask.net/blog/archive/autolink-och-greasemonkey-vems-ar-hypertexten/" rel="external" class="url">what comes to mind : AutoLink och Greasemonkey – vems är hypertexten?</a></cite></li>
+ <li>Posted: <time datetime="2005-04-20T21:42:10+00:00">2005/04/20 9:42 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1853" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>32</p>
+<p>[...] that disables Grease Monkey on any website that includes the code. 	The battle has begun! 	Read More 	 					 				 					 						This entry was posted 						  						on Wednesday, May 18th, [...]</p>
+<footer>
+<ul class="meta">
+ <li class="author">Pingback by: <cite><a href="http://www.uneasysilence.com/archive/2005/05/3057/" rel="external" class="url">.: UNEASYsilence :.  » Blog Archive   » Spank the Monkey</a></cite></li>
+ <li>Posted: <time datetime="2005-05-18T17:14:07+00:00">2005/05/18 5:14 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1854" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>33</p>
+<p><strong>Disable Greasemonkey</strong>
+
+How To Disable GreaseMonkey On Your Web Site by Dean Edwards. As well as really valid reasons to do so….</p>
+<footer>
+<ul class="meta">
+ <li class="author">Trackback by: <cite><a href="http://www.simiandesign.com/link-fu/2005-05.php#003028" rel="external" class="url">Link-Fu</a></cite></li>
+ <li>Posted: <time datetime="2005-05-18T20:05:53+00:00">2005/05/18 8:05 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1855" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>34</p>
+<p>[...]  Compare Star Wars to Bush Administration 			 		 	 		 			Disabling Greasemonkey 	 			 					Link  	 					 				 					 						This entry was posted 						  						on Wednesday, May 18th, 2005 [...]</p>
+<footer>
+<ul class="meta">
+ <li class="author">Pingback by: <cite><a href="http://www.gblog.info/?p=347" rel="external" class="url">G Blog  » Blog Archive   » Disabling Greasemonkey</a></cite></li>
+ <li>Posted: <time datetime="2005-05-18T20:08:19+00:00">2005/05/18 8:08 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1856" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>35</p>
+<p>[...] s.  Those revisions confused the page’s own Java script enough to break things. 	His work around is clever; though it’s just the start of a arms race.  He change’s the [...]</p>
+<footer>
+<ul class="meta">
+ <li class="author">Pingback by: <cite><a href="http://gibbon.cozy.org/archives/2005/05/password-protected-java-scripting/" rel="external" class="url">Gibbon’s Garage  » Blog Archive   » Password protected Java Scripting</a></cite></li>
+ <li>Posted: <time datetime="2005-05-19T13:43:19+00:00">2005/05/19 1:43 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1859" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>36</p>
+<p>[...] n Your Web Site Posted by Administrator under Technology&nbsp;  	Source: dean.edwards.name Linkified  	 													 	 	 	&nbsp; 				        		 		 	    Leave a Reply       Name (requir [...]</p>
+<footer>
+<ul class="meta">
+ <li class="author">Pingback by: <cite><a href="http://www.rudrapati.com/blog/?p=41" rel="external" class="url">THE Blog » How To Disable GreaseMonkey On Your Web Site</a></cite></li>
+ <li>Posted: <time datetime="2005-05-19T18:56:46+00:00">2005/05/19 6:56 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1863" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>37</p>
+<p>[...]  websites.  Unfortunately, I’m sure advertisers will figure this out soon as well.   read more  	For those of you that dont know what GreaseMonkey is, it’s a way to add DHTM [...]</p>
+<footer>
+<ul class="meta">
+ <li class="author">Pingback by: <cite><a href="http://mdipi.com/?p=12" rel="external" class="url">Cult of the Mike » How To Disable GreaseMonkey On Your Website</a></cite></li>
+ <li>Posted: <time datetime="2005-05-19T19:58:53+00:00">2005/05/19 7:58 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1864" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>38</p>
+<p>[...] 			
+ 
+ 				Friday May 20, 2005			
+ 				
+ 
+ 					How To Disable GreaseMonkey
+ 					
+ 							How to disable GreaseMonkey on your web site.  											
+ 					
+ 						Written by Scott at 0 [...]</p>
+<footer>
+<ul class="meta">
+ <li class="author">Pingback by: <cite><a href="http://www.jarkolicious.com/?p=1052" rel="external" class="url">jarkolicious  » probes   » How To Disable GreaseMonkey</a></cite></li>
+ <li>Posted: <time datetime="2005-05-20T01:29:17+00:00">2005/05/20 1:29 am</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1865" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>39</p>
+<p>[...] bmasters o propietarios de sitios web. No en balde, ya hay quien ha creado un código para impedir que Greasemonkey modifique el sitio web. 	FUENTE: Consumer.es  					
+ 				
+ 					
+ 			 [...]</p>
+<footer>
+<ul class="meta">
+ <li class="author">Pingback by: <cite><a href="http://www.ensmx.com/2005/05/20/greasemonkey-la-web-en-manos-del-usuario/" rel="external" class="url">ensmx - keep it simple - tu portal de internet - ensenada, baja california</a></cite></li>
+ <li>Posted: <time datetime="2005-05-20T08:02:12+00:00">2005/05/20 8:02 am</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1885" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>40</p>
+<p><strong>Waan en werkelijkheid met Greasemonkey</strong>
+
+Gevaarlijk (maar oh zo prachtig), die GreaseMonkey-extensie voor Firefox. O’Reilly-blogger Rael kon zijn eigen werkelijkheid niet meer onderscheiden van ‘de echte’ werkelijkheid, schrijft Jeremy Dunck op Greasemonkeys weblog: “(…) Rael made a pre…</p>
+<footer>
+<ul class="meta">
+ <li class="author">Trackback by: <cite><a href="http://weblog.r-win.com/archives/002593.html" rel="external" class="url">R-win.com [weblog] drwxr--r--</a></cite></li>
+ <li>Posted: <time datetime="2005-05-24T20:17:31+00:00">2005/05/24 8:17 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1890" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>41</p>
+<p>[...] key scripts are showing up to set default prefs on the edit screens!  	…Something that I read the other day on a site detailing steps to disable Greasemonkey really clued  [...]</p>
+<footer>
+<ul class="meta">
+ <li class="author">Pingback by: <cite><a href="http://www.factorycity.net/blog/?p=37" rel="external" class="url">FactoryCity  » Blog Archive   » It’s my web, dammit, and I’ll do what I want!</a></cite></li>
+ <li>Posted: <time datetime="2005-05-25T23:59:30+00:00">2005/05/25 11:59 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1900" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>42</p>
+<p>[...] -Greasemonkey, but man… things are sure going to get ugly.  The arms race is already beginning.  	 	 	                         	 	 	           		 		 	    Leave a Comment:       Na [...]</p>
+<footer>
+<ul class="meta">
+ <li class="author">Pingback by: <cite><a href="http://www.chausse.org/blog/?p=734" rel="external" class="url">Chausse.org</a></cite></li>
+ <li>Posted: <time datetime="2005-05-27T14:25:31+00:00">2005/05/27 2:25 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1901" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>43</p>
+<p><strong>Greasemonkey == Not anymore?</strong>
+
+I noticed in the latest number of a Swedish IT magazine called
+Internetworld that they have a list of top 10 applications to use in
+Firefox.</p>
+<footer>
+<ul class="meta">
+ <li class="author">Trackback by: <cite><a href="http://blog.radio-xperience.com/pivot/entry.php?id=46" rel="external" class="url">Forser Development</a></cite></li>
+ <li>Posted: <time datetime="2005-05-28T00:43:35+00:00">2005/05/28 12:43 am</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1911" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>44</p>
+<p>[...] g/toogle/” title=”http://c6.org/toogle/”&gt;Toogle Image      Search —  	How      To Disable GreaseMonkey On You [...]</p>
+<footer>
+<ul class="meta">
+ <li class="author">Pingback by: <cite><a href="http://www.firstleft.net/2005/05/29/delicious-links/" rel="external" class="url">FirstLeft » Delicious Links</a></cite></li>
+ <li>Posted: <time datetime="2005-05-30T06:27:39+00:00">2005/05/30 6:27 am</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1912" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>45</p>
+<p>[...] you trust me not to flood you with spam or other ads is important.  	Dean Edwards recently wrote a script to disale Greasemonkey.  	…GreaseMonkey broke my site. I didn’t realise [...]</p>
+<footer>
+<ul class="meta">
+ <li class="author">Pingback by: <cite><a href="http://www.kevinleitch.co.uk/wp/?p=203" rel="external" class="url">Autism Blog Web Design Blog:  » Who’s Site Is It Anyway?</a></cite></li>
+ <li>Posted: <time datetime="2005-05-31T10:07:11+00:00">2005/05/31 10:07 am</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment1999" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>46</p>
+<p><strong>CSS, Web/Print Design, Freelancing Link Dump</strong>
+
+Just a pile of links that I’m dumping here, primarily for my future reference, but they might come in handy to somebody here. CSS Cheat Sheet Jello CSS Layouts Tips…</p>
+<footer>
+<ul class="meta">
+ <li class="author">Trackback by: <cite><a href="http://utterlyboring.com/archives/2005/06/10/css_webprint_design_freelancing_link_dump.php" rel="external" class="url">UtterlyBoring.com</a></cite></li>
+ <li>Posted: <time datetime="2005-06-10T17:20:02+00:00">2005/06/10 5:20 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment2201" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>47</p>
+<p><strong>Links curiosos, Vol. 17</strong>
+
+Aquí les va el décimo séptimo volúmen de Links curiosos de los últimos días:
+
+    * Aglarond Blog: Star Wars vs Titanic
+    * iPodizate: sí, un weblog sobre iPods
+    * netadblog: publicidad censurada a MTV.
+    * Sólo para geeks: Como deshabilitar Greasemonkey en</p>
+<footer>
+<ul class="meta">
+ <li class="author">Trackback by: <cite><a href="http://www.andufo.net/2005/07/12/links-curiosos-vol-17/" rel="external" class="url">andufo.net</a></cite></li>
+ <li>Posted: <time datetime="2005-07-12T21:23:28+00:00">2005/07/12 9:23 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment2292" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>48</p>
+<p>[...] the “GreaseMonkey Conundrum”:  Who really owns web layout?   Many websites are preventing GreaseMonkey-enabled browsers from accessing their pages in order to keep control o [...]</p>
+<footer>
+<ul class="meta">
+ <li class="author">Pingback by: <cite><a href="http://inkblots.markwoodman.com/2005/08/11/feed-with-style/" rel="external" class="url">inkBlots » Feed with Style</a></cite></li>
+ <li>Posted: <time datetime="2005-08-12T00:31:34+00:00">2005/08/12 12:31 am</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment2944" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>49</p>
+<p>[...] isage. This could have a commercial and technical angle if their use becomes wide-spread. For me the wider their use becomes the bette [...]</p>
+<footer>
+<ul class="meta">
+ <li class="author">Pingback by: <cite><a href="http://slgeorge.wordpress.com/2006/01/20/making-the-web-your-way-with-greasemonkey/" rel="external" class="url">slgeorge’s Blog » Making the Web your way with Greasemonkey</a></cite></li>
+ <li>Posted: <time datetime="2006-01-20T14:26:29+00:00">2006/01/20 2:26 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment3090" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>50</p>
+<p><strong>Making the Web your way with Greasemonkey</strong>
+
+Greasemonkey lets you run scripts when you visit a web site. Using a DHTML script stored on your computer it can change how a web site looks or functions to fit your preferences. Think of it as configuring a web site to your needs.
+There are lots of us…</p>
+<footer>
+<ul class="meta">
+ <li class="author">Trackback by: <cite><a href="https://slgeorge.wordpress.com/2006/01/20/making-the-web-your-way-with-greasemonkey/" rel="external" class="url">slgeorge's Blog</a></cite></li>
+ <li>Posted: <time datetime="2006-03-19T20:12:42+00:00">2006/03/19 8:12 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment193427" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>51</p>
+<p>[...] Pour commencer, voici quelques url qui peuvent être utiles pour faire des user scripts avec Greasemonkey : -� « Writing User Scripts », explication rapide sur la création de scripts Greasemonkey, -� « Gecko DOM Reference » -� Une liste de User scripts alimentée par un wiki, -� Le site UserScripts qui veut proposer un outil plus poussé pour catégoriser les différents scripts. -� Une présentation en français sur le site du Journal du net dans la section développeurs. À noter : Les utilisateurs d’Internet Explorer peuvent aussi utiliser les user scripts � l’aide de l’extension turnabout. La version 8 du navigateur Opera semble aussi pourvoir supporter les scripts utilisateurs. À noter encore : Utiliser GreaseMonkey peut causer quelques soucis avec les pages utilisant déj� du javascript, voir ce témoignage [1]. [...]</p>
+<footer>
+<ul class="meta">
+ <li class="author">Pingback by: <cite><a href="http://arliguy.net/2005/05/29/greasemonkey-et-chaque-site-devient-mien/" rel="external" class="url">Arliguy.dot.net › Greasemonkey et chaque site devient mien</a></cite></li>
+ <li>Posted: <time datetime="2008-02-20T22:51:40+00:00">2008/02/20 10:51 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment370555" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>52</p>
+<p>[...] habe ich das hier gefunden: Dean Edwards: How To Disable GreaseMonkey On Your Web Site Wei� nicht, ob das heutzutage noch so funktioniert oder ob sich Greasemonkey anders in die Seite [...]</p>
+<footer>
+<ul class="meta">
+ <li class="author">Pingback by: <cite><a href="http://www.html.de/javascript-ajax-und-dhtml/32864-greasemonkey-verbieten-oder-einfach-nur-analysieren.html#post246550" rel="external" class="url">Greasemonkey verbieten oder einfach nur analysieren.</a></cite></li>
+ <li>Posted: <time datetime="2010-05-24T13:52:08+00:00">2010/05/24 1:52 pm</time></li>
+</ul>
+</footer>
+</article>
+
+<article id="comment376720" class="trackback">
+<p class="permalink">
+<span>Comment: #</span>53</p>
+<p>[...] dettagli della procedura (che però non funziona sempre) possono essere approfonditi sul sito di Dean Edwards, l’autore [...]</p>
+<footer>
+<ul class="meta">
+ <li class="author">Pingback by: <cite><a href="http://www.nicoladagostino.net/greasemonkey.html" rel="external" class="url">NicolaD’Agostino.net » Trucchiamo Firefox con Greasemonkey</a></cite></li>
+ <li>Posted: <time datetime="2011-02-06T12:27:43+00:00">2011/02/06 12:27 pm</time></li>
+</ul>
+</footer>
+</article>
+ <p>Comments are closed.</p>
+</section>
+
+<footer>
+ <p>Copyright © 2004-2010 Dean Edwards. All rights reserved.</p>
+</footer>
+
+
+<div id="ChromeGesture-BackgroundSupportElement" style="position: fixed; top: 0px; left: 0px; background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: transparent; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; z-index: -65536; width: 1349px; height: 610px; background-position: initial initial; background-repeat: initial initial; "></div></body></html>

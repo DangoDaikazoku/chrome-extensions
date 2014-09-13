@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;  charset=utf-8">
+<style type="text/css">
+p {border-style:solid;
+	border-color:#06C;
+	border-width:thin;
+	}
+a:link {
+	text-decoration:none;
+	color:#333;
+	}
+</style>
+<script type="text/javascript">
+
+var names=[];
+var list=[];
+var flag=0;
+
+function save(e){
+	if(e.keyCode==13){
+	
+	var name=document.getElementById("nme").value;
+	document.getElementById("nme").value="";
+	
+
+
+for(var i=0;i<names.length;i++)
+	{
+	if(name==names[i])
+		{return;}
+		}
+
+	names[names.length]=name;
+	var strng=JSON.stringify(names);
+	localStorage["chatstalk"]=strng;	
+	
+		}
+	}
+	
+	
+function loadnames(){
+		  var k=0;
+		  var j;
+		  var strng
+		  var strng2
+		  if(localStorage["list"])
+		  {		 
+			 strng2=localStorage["list"];
+	  	  	 list=JSON.parse(strng2);
+		  }
+		  if(localStorage["chatstalk"])
+		  {
+			  strng=localStorage["chatstalk"];
+			  names=JSON.parse(strng);
+		  }
+		  
+		  
+		  var txt="";
+		  
+		  while(list[k]){
+			  j=0;
+			 
+			  while(names[j]){
+				 
+				 if(names[j].toLowerCase()==list[k].toLowerCase())
+				 {
+				 flag=1;
+				 }
+				 j++;
+			  }
+			  
+		  if(flag){
+			  txt+="<p style='background-color:#FCC654; border-radius:4px;'><a href='#'>";
+			  txt+=list[k];
+			  txt+="</a></p>";  
+			  k++;
+			  flag=0;
+			  }
+		  else{
+			  txt+="<p style='border-radius:4px;'><a href='#'>";
+			  txt+=list[k];
+			  txt+="</a></p>";  
+			  k++;
+		  	  }
+		  }
+		  
+		 var innerdiv=document.getElementById("inner"); 
+		 innerdiv.innerHTML=txt;
+  	}
+	
+function cleardata(){
+	localStorage.removeItem("chatstalk");
+	}
+
+function showdata(){
+	
+alert(names);
+	
+	}
+</script>
+<title>project #2_1</title>
+</head>
+<body onLoad="loadnames()" style="width:220px; " >
+
+
+<div id="outer" style="border-style:solid; border-color:#395899; padding:4px; width:190px;">
+<center>
+<input id="nme" placeholder="enter name to look for" onKeyPress="save(event)" style="width:180px;">
+<input type="button" onClick="cleardata()" value="clear"> &nbsp;&nbsp;&nbsp;&nbsp;<input  type="button" value="show" onClick="showdata()">
+</center>
+<p></p>
+<div id="inner">
+connection error !
+</div>
+<p></p>
+</div>
+
+
+</body>
+</html>
