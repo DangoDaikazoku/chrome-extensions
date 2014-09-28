@@ -50,4 +50,14 @@ function constructImageURL(photo) {
 
 //asdsa
 }
+
+function constructSampleCloneImageURL(photo) {
+  return "http://farm" + photo.getAttribute("farm") +
+      ".static.flickr.com/" + photo.getAttribute("server") +
+      "/" + photo.getAttribute("id") +
+      "_" + photo.getAttribute("secret") +
+      "_s.jpg";
+
+//asdsa
+}
 </script>
