@@ -13,6 +13,7 @@ img {
 }
 </style>
 
+
 <script>
 var req = new XMLHttpRequest();
 req.open(
@@ -46,5 +47,7 @@ function constructImageURL(photo) {
       "/" + photo.getAttribute("id") +
       "_" + photo.getAttribute("secret") +
       "_s.jpg";
+
+//asdsa
 }
 </script>
